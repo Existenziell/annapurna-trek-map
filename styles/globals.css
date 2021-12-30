@@ -1,0 +1,68 @@
+/* --------------------------------------------------------
+Style Sheet for annapurna-trek-map
+
+version: 0.9
+last modified: 30.12.2021 by Christof Bauer
+author: Christof Bauer
+email: bauer.christof@gmail.com
+----------------------------------------------------------*/
+
+:root {
+  --color-brand: #a6d1c9;
+  --color-brand-dark: #282b29;
+  --color-highlight: #C90076;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ==========================================================================
+	General overrides and utilities
+	========================================================================== */
+
+html, body {
+	scroll-behavior: smooth;
+}
+
+
+/* ==========================================================================
+	Mapbox overrides
+	========================================================================== */
+
+.mapboxgl-canvas {
+  @apply absolute top-0 bottom-0 left-0 w-full h-full;
+}
+
+.mapboxgl-popup {
+  @apply text-left min-w-4/5 sm:min-w-3/4 lg:min-w-1/2 overflow-hidden; 
+}
+
+div.mapboxgl-popup-content {
+  @apply p-2 bg-white/20 backdrop-blur-md;
+}
+
+.mapboxgl-popup-content div {
+  @apply text-sm p-4 shadow font-sans bg-white/60 backdrop-blur-md;
+}
+
+.mapboxgl-popup-content span {
+  @apply text-xs;
+}
+
+.mapboxgl-popup-content img {
+  @apply w-full shadow-lg mb-2;
+}
+
+.mapboxgl-popup-tip {
+  @apply opacity-20;
+}
+
+.mapboxgl-popup-close-button {
+  @apply text-xl px-3 hover:scale-105 transition-all focus:outline-none;
+}
+
+.suggestions-wrapper {
+  @apply text-left;
+}
