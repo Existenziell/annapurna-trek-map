@@ -44,15 +44,15 @@ const MapComponent = () => {
 
 
   useEffect(() => {
-    console.log("effect.......");
-    console.log(popupChanged);
+    // console.log("effect.......");
+    // console.log(popupChanged);
 
     const btn = document.getElementsByClassName("next")[0]
-    console.log(btn);
+    // console.log(btn);
     if (btn) {
       btn.addEventListener("click", () => {
         const nextId = (parseInt(btn.getAttribute('data-id')) + 1).toString()
-        console.log("herehrhehrh");
+        // console.log("herehrhehrh");
         openNextPopup(nextId, Map)
       })
     }
