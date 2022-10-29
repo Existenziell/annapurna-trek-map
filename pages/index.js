@@ -6,11 +6,13 @@ import { data } from '../lib/data'
 import Head from 'next/head'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+import Overlay from '../components/overlay'
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
 const MapComponent = () => {
   const [Map, setMap] = useState()
   const [pageIsMounted, setPageIsMounted] = useState(false)
+  const [overlayOpen, setOverlayOpen] = useState(true)
 
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
@@ -46,6 +48,10 @@ const MapComponent = () => {
         <meta name='description' content='My trek around the Annapurna Circuit, Himalayas, Nepal, 2019 | shift-happens' />
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
       </Head>
+
+      {overlayOpen &&
+        <Overlay overlayOpen={overlayOpen} setOverlayOpen={setOverlayOpen} />
+      }
 
       <div id='map' className='w-full h-screen' />
     </>

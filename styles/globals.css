@@ -66,3 +66,14 @@ div.mapboxgl-popup-content {
 .suggestions-wrapper {
   @apply text-left;
 }
+
+
+/* ==========================================================================
+	Forms 
+	========================================================================== */
+
+.button {
+  @apply bg-brand-dark text-brand py-4 px-8 rounded shadow-lg transition-all cursor-pointer
+    hover:shadow-sm hover:text-white dark:bg-brand dark:text-brand-dark
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-dark;
+}
