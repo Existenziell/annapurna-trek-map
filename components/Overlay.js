@@ -4,8 +4,10 @@ const Overlay = ({ overlayOpen, setOverlayOpen }) => {
       <div className="bg-white rounded-sm shadow p-6 max-w-lg w-lg">
         <h1 className='mb-2 text-2xl'>Namaste,</h1>
         <p className='mb-4'>This is the Annapurna Circuit Trek in Nepal, a Visual Journey through parts of the Himalayas.</p>
-        <p className='mb-4 text-xs'>Mouse Controls:<br />Hold Left Mouse Button to Drag.<br />Hold Right Mouse Button to Pan/Rotate.<br />Mouse Wheel to Zoom.</p>
         <button onClick={() => setOverlayOpen(!overlayOpen)} className='button'>Start Trek</button>
+        <p className='mt-4 text-xs'>
+          Mouse Controls:<br />Hold Left Mouse Button to Drag<br />Hold Right Mouse Button to Pan/Rotate<br />Mouse Wheel to Zoom<br />Click on an image to enlarge it
+        </p>
       </div>
     </div>
   )

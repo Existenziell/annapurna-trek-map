@@ -13,9 +13,7 @@ function App({ Component, pageProps }) {
         <link rel='apple-touch-icon' sizes='180x180' href='/favicon/apple-touch-icon.png' />
         <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon/favicon-16x16.png' />
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin="true" />
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Gotu&display=swap' />
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
       </Head>
       <Layout>
         <Component {...pageProps} />

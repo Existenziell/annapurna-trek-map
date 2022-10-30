@@ -7,10 +7,12 @@ author: Christof Bauer
 email: bauer.christof@gmail.com
 ----------------------------------------------------------*/
 
+@import url("https://fonts.googleapis.com/css?family=Gotu&display=swap");
+
 :root {
   --color-brand: #a6d1c9;
   --color-brand-dark: #282b29;
-  --color-highlight: #C90076;
+  --color-cta: #C90076;
 }
 
 @tailwind base;
@@ -36,14 +38,14 @@ html, body {
 }
 
 .mapboxgl-popup {
-  @apply text-left min-w-4/5 sm:min-w-3/4 lg:min-w-1/2 overflow-hidden; 
+  @apply text-left overflow-hidden; 
 }
 
 div.mapboxgl-popup-content {
   @apply p-2 bg-white/20 backdrop-blur-md;
 }
 
-.mapboxgl-popup-content div {
+.mapboxgl-popup-content .popup-wrapper {
   @apply text-sm p-4 shadow font-sans bg-white/60 backdrop-blur-md;
 }
 
@@ -52,7 +54,7 @@ div.mapboxgl-popup-content {
 }
 
 .mapboxgl-popup-content img {
-  @apply w-full shadow-lg mb-2;
+  @apply w-full shadow-lg mb-2 cursor-pointer;
 }
 
 .mapboxgl-popup-tip {
@@ -60,13 +62,28 @@ div.mapboxgl-popup-content {
 }
 
 .mapboxgl-popup-close-button {
-  @apply text-xl px-3 hover:scale-105 transition-all focus:outline-none;
+  @apply text-xl px-3 hover:text-cta transition-all focus:outline-none;
 }
 
 .suggestions-wrapper {
   @apply text-left;
 }
 
+.popup-nav {
+  @apply flex justify-between items-center mt-4 text-xs;
+}
+
+.popup-nav button {
+  @apply hover:text-cta;
+}
+
+.fullscreen-container {
+  @apply absolute top-0 bottom-0 left-0 right-0 bg-black object-contain;
+}
+
+.fullscreen {
+  @apply fixed top-0 bottom-0 h-screen w-screen object-contain bg-black/30 backdrop-blur z-20 shadow-xl cursor-pointer p-4 md:p-8;
+}
 
 /* ==========================================================================
 	Forms 
