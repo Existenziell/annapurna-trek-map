@@ -23,7 +23,7 @@ const MapComponent = () => {
       // style: 'mapbox://styles/mapbox/dark-v10',
       // style: 'mapbox://styles/mapbox/streets-v11',
       // style: 'mapbox://styles/mapbox/navigation-night-v1',
-      center: [84, 28.5],
+      center: [84.1, 28.5],
       zoom: 9.5,
       pitch: 45,
     })
