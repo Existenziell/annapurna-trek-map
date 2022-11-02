@@ -28,6 +28,24 @@ html, body {
 	scroll-behavior: smooth;
 }
 
+.button {
+  @apply bg-brand-dark hover:text-brand py-4 px-8 rounded shadow-lg transition-all cursor-pointer
+    hover:shadow-sm text-white dark:bg-brand dark:text-brand-dark
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-dark;
+}
+
+.link {
+  @apply border-b border-dotted border-cta outline-none;
+}
+
+.link:hover {
+  @apply border-transparent text-cta transition-all;
+}
+
+.link:disabled {
+  @apply cursor-not-allowed;
+}
+
 
 /* ==========================================================================
 	Mapbox overrides
@@ -83,14 +101,4 @@ div.mapboxgl-popup-content {
 
 .fullscreen {
   @apply fixed top-0 bottom-0 h-screen w-screen object-contain bg-black/30 backdrop-blur z-20 shadow-xl cursor-pointer p-4 md:p-8;
-}
-
-/* ==========================================================================
-	Forms 
-	========================================================================== */
-
-.button {
-  @apply bg-brand-dark text-brand py-4 px-8 rounded shadow-lg transition-all cursor-pointer
-    hover:shadow-sm hover:text-white dark:bg-brand dark:text-brand-dark
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-dark;
 }
