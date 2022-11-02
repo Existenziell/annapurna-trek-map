@@ -56,7 +56,7 @@ html, body {
 }
 
 .mapboxgl-popup {
-  @apply text-left overflow-hidden; 
+  @apply text-left overflow-hidden md:min-w-[400px];
 }
 
 div.mapboxgl-popup-content {
