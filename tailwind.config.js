@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -10,10 +10,8 @@ module.exports = {
         ],
       },
       colors: {
-        'brand': '#a6d1c9',
-        'brand-dark': '#282b29',
-        'cta': '#C90076',
-      }
+        'accent': '#a6d1c9',
+      },
     },
   },
   variants: {

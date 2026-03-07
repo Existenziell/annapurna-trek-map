@@ -1,18 +1,11 @@
 /* --------------------------------------------------------
 Style Sheet for annapurna-trek-map
-
-version: 0.9
-last modified: 30.12.2021 by Christof Bauer
-author: Christof Bauer
-email: bauer.christof@gmail.com
 ----------------------------------------------------------*/
 
 @import url("https://fonts.googleapis.com/css?family=Gotu&display=swap");
 
 :root {
-  --color-brand: #a6d1c9;
-  --color-brand-dark: #282b29;
-  --color-cta: #C90076;
+  --color-accent: #a6d1c9;
 }
 
 @tailwind base;
@@ -29,17 +22,17 @@ html, body {
 }
 
 .button {
-  @apply bg-brand-dark hover:text-brand py-4 px-8 rounded shadow-lg transition-all cursor-pointer
-    hover:shadow-sm text-white dark:bg-brand dark:text-brand-dark
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-dark;
+  @apply bg-gray-800 hover:text-accent py-2 px-4 rounded shadow-lg transition-all cursor-pointer
+    hover:shadow-sm text-white dark:bg-accent dark:text-gray-800
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800;
 }
 
 .link {
-  @apply border-b border-dotted border-cta outline-none;
+  @apply border-b border-dotted border-accent outline-none;
 }
 
 .link:hover {
-  @apply border-transparent text-cta transition-all;
+  @apply border-transparent text-accent transition-all;
 }
 
 .link:disabled {
@@ -55,50 +48,6 @@ html, body {
   @apply absolute top-0 bottom-0 left-0 w-full h-full;
 }
 
-.mapboxgl-popup {
-  @apply text-left overflow-hidden md:min-w-[400px];
-}
-
-div.mapboxgl-popup-content {
-  @apply p-2 bg-white/20 backdrop-blur-md;
-}
-
-.mapboxgl-popup-content .popup-wrapper {
-  @apply text-sm p-4 shadow font-sans bg-white/60 backdrop-blur-md;
-}
-
-.mapboxgl-popup-content span {
-  @apply text-xs;
-}
-
-.mapboxgl-popup-content img {
-  @apply w-full shadow-lg mb-2 cursor-pointer;
-}
-
-.mapboxgl-popup-tip {
-  @apply opacity-20;
-}
-
-.mapboxgl-popup-close-button {
-  @apply text-xl px-3 hover:text-cta transition-all focus:outline-none;
-}
-
 .suggestions-wrapper {
   @apply text-left;
-}
-
-.popup-nav {
-  @apply flex justify-between items-center mt-4 text-xs;
-}
-
-.popup-nav button {
-  @apply hover:text-cta;
-}
-
-.fullscreen-container {
-  @apply absolute top-0 bottom-0 left-0 right-0 bg-black object-contain;
-}
-
-.fullscreen {
-  @apply fixed top-0 bottom-0 h-screen w-screen object-contain bg-black/30 backdrop-blur z-20 shadow-xl cursor-pointer p-4 md:p-8;
 }

@@ -1,0 +1,38 @@
+'use client'
+
+import { useState } from 'react'
+
+export default function MobileNotice() {
+  const [dismissed, setDismissed] = useState(false)
+
+  if (dismissed) return null
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 md:hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mobile-notice-title"
+    >
+      <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
+        <h2
+          id="mobile-notice-title"
+          className="text-lg font-medium text-gray-900 dark:text-gray-100"
+        >
+          Optimized for desktop
+        </h2>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+          This app works best on a larger screen. You can continue here, but
+          for the best experience we recommend using a desktop or tablet.
+        </p>
+        <button
+          type="button"
+          onClick={() => setDismissed(true)}
+          className="button mt-4 w-full"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  )
+}
