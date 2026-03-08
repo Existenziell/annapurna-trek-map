@@ -1,8 +1,10 @@
 import { describe, it, expect, vi } from 'vitest'
+import { useState } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import RightPanel from '@/components/RightPanel'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { DEFAULT_MAP_SETTINGS } from '@/types'
+import type { RightPanelTabId } from '@/types'
 
 const defaultProps = {
   selectedMarker: null,
@@ -11,6 +13,8 @@ const defaultProps = {
   onStartTrek: vi.fn(),
   settings: DEFAULT_MAP_SETTINGS,
   onSettingsChange: vi.fn(),
+  activeTab: 'content' as RightPanelTabId,
+  onTabChange: vi.fn(),
 }
 
 function renderWithTheme(ui: React.ReactElement) {
@@ -31,14 +35,34 @@ describe('RightPanel', () => {
   })
 
   it('shows Settings tab when Settings is clicked', () => {
-    renderWithTheme(<RightPanel {...defaultProps} />)
+    function PanelWithTabState() {
+      const [activeTab, setActiveTab] = useState<RightPanelTabId>('content')
+      return (
+        <RightPanel
+          {...defaultProps}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+      )
+    }
+    renderWithTheme(<PanelWithTabState />)
     fireEvent.click(screen.getByRole('button', { name: /^settings$/i }))
     expect(screen.getByLabelText(/map style/i)).toBeInTheDocument()
     expect(screen.queryByText(/namaste/i)).not.toBeInTheDocument()
   })
 
   it('shows map controls instructions in Settings tab', () => {
-    renderWithTheme(<RightPanel {...defaultProps} />)
+    function PanelWithTabState() {
+      const [activeTab, setActiveTab] = useState<RightPanelTabId>('content')
+      return (
+        <RightPanel
+          {...defaultProps}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+      )
+    }
+    renderWithTheme(<PanelWithTabState />)
     fireEvent.click(screen.getByRole('button', { name: /^settings$/i }))
     expect(screen.getByText(/hold left mouse button to drag/i)).toBeInTheDocument()
   })

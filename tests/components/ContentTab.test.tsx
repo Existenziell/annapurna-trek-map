@@ -60,19 +60,63 @@ describe('ContentTab', () => {
     expect(screen.queryByText(/namaste/i)).not.toBeInTheDocument()
   })
 
-  it('shows placeholder when marker has no image', () => {
-    const markerWithoutImage: TrekMarkerType = {
+  it('shows placeholder when marker has no image or video', () => {
+    const markerWithoutMedia: TrekMarkerType = {
       ...fixtureMarker,
       properties: { ...fixtureMarker.properties, image: undefined },
     }
     render(
       <ContentTab
         {...noMarkerProps}
-        selectedMarker={markerWithoutImage}
+        selectedMarker={markerWithoutMedia}
       />,
     )
     expect(screen.getByText(/no image/i)).toBeInTheDocument()
     expect(screen.queryByRole('img')).not.toBeInTheDocument()
+    expect(document.querySelector('video')).not.toBeInTheDocument()
+  })
+
+  it('shows video when marker has video (video takes precedence over image)', () => {
+    const markerWithVideo: TrekMarkerType = {
+      ...fixtureMarker,
+      id: 99,
+      properties: {
+        ...fixtureMarker.properties,
+        image: '2.jpg',
+        video: 'video/01.mp4',
+      },
+    }
+    const { container } = render(
+      <ContentTab
+        {...noMarkerProps}
+        selectedMarker={markerWithVideo}
+      />,
+    )
+    const video = container.querySelector('video')
+    expect(video).toBeInTheDocument()
+    expect(video).toHaveAttribute('src', '/trek/video/01.mp4')
+    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+  })
+
+  it('shows video when marker has video only', () => {
+    const markerVideoOnly: TrekMarkerType = {
+      ...fixtureMarker,
+      id: 98,
+      properties: {
+        ...fixtureMarker.properties,
+        image: undefined,
+        video: 'video/heli.mp4',
+      },
+    }
+    const { container } = render(
+      <ContentTab
+        {...noMarkerProps}
+        selectedMarker={markerVideoOnly}
+      />,
+    )
+    const video = container.querySelector('video')
+    expect(video).toBeInTheDocument()
+    expect(video).toHaveAttribute('src', '/trek/video/heli.mp4')
   })
 
   it('calls onPrev when Prev is clicked and marker is selected', () => {

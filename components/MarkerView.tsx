@@ -15,8 +15,10 @@ export default function MarkerView({
 }: MarkerViewProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [lastLoadedFullscreenSrc, setLastLoadedFullscreenSrc] = useState<string | null>(null)
-  const { altitude, image, exif } = marker.properties
+  const { altitude, image, video, dateTime, desc } = marker.properties
   const imageSrc = image ? `/trek/${image}` : null
+  const videoSrc = video ? `/trek/${video}` : null
+  const hasMedia = videoSrc ?? imageSrc
   const alt = `Trek stop ${marker.id}`
 
   const fullscreenImageLoaded = imageSrc !== null && lastLoadedFullscreenSrc === imageSrc
@@ -48,11 +50,21 @@ export default function MarkerView({
       <div className="flex flex-1 min-h-0 items-center justify-center">
         <button
           type="button"
-          onClick={() => imageSrc && setIsFullscreen(true)}
+          onClick={() => hasMedia && setIsFullscreen(true)}
           className="relative w-full aspect-[4/3] max-h-[50vh] rounded shadow-lg overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:cursor-default disabled:opacity-80"
-          disabled={!imageSrc}
+          disabled={!hasMedia}
         >
-          {imageSrc ? (
+          {videoSrc ? (
+            <video
+              src={videoSrc}
+              controls
+              playsInline
+              muted
+              loop
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              aria-label={alt}
+            />
+          ) : imageSrc ? (
             <Image
               src={imageSrc}
               alt={alt}
@@ -67,12 +79,15 @@ export default function MarkerView({
           )}
         </button>
       </div>
+      {desc != null && desc !== '' && (
+        <p className="text-sm text-level-4">{desc}</p>
+      )}
 
-      {isFullscreen && imageSrc && (
+      {isFullscreen && hasMedia && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Fullscreen image"
+          aria-label={videoSrc ? 'Fullscreen video' : 'Fullscreen image'}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md cursor-zoom-out"
           onClick={() => setIsFullscreen(false)}
         >
@@ -80,27 +95,40 @@ export default function MarkerView({
             className="relative flex items-center justify-center max-h-[90vh] max-w-[95vw] cursor-default min-h-[200px] min-w-[200px]"
             onClick={(e) => e.stopPropagation()}
           >
-            {!fullscreenImageLoaded && (
-              <div
-                className="absolute inset-0 flex items-center justify-center z-10"
-                aria-hidden
-              >
-                <div
-                  className="w-12 h-12 rounded-full border-2 border-white border-t-transparent animate-spin"
-                  role="img"
-                  aria-label="Loading image"
+            {videoSrc ? (
+              <video
+                src={videoSrc}
+                controls
+                playsInline
+                autoPlay
+                className="max-h-[85vh] max-w-[80vw] w-auto h-auto object-contain rounded shadow-lg"
+                aria-label={alt}
+              />
+            ) : (
+              <>
+                {!fullscreenImageLoaded && (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center z-10"
+                    aria-hidden
+                  >
+                    <div
+                      className="w-12 h-12 rounded-full border-2 border-white border-t-transparent animate-spin"
+                      role="img"
+                      aria-label="Loading image"
+                    />
+                  </div>
+                )}
+                <Image
+                  src={imageSrc!}
+                  alt={alt}
+                  width={1920}
+                  height={1080}
+                  className="max-h-[85vh] max-w-[80vw] w-auto h-auto object-contain rounded shadow-lg"
+                  draggable={false}
+                  onLoad={() => setLastLoadedFullscreenSrc(imageSrc)}
                 />
-              </div>
+              </>
             )}
-            <Image
-              src={imageSrc}
-              alt={alt}
-              width={1920}
-              height={1080}
-              className="max-h-[85vh] max-w-[80vw] w-auto h-auto object-contain rounded shadow-lg"
-              draggable={false}
-              onLoad={() => setLastLoadedFullscreenSrc(imageSrc)}
-            />
           </div>
           {hasPrev && (
             <button
@@ -110,7 +138,7 @@ export default function MarkerView({
                 onPrev()
               }}
               className="fixed left-4 top-1/2 -translate-y-1/2 z-[51] flex items-center justify-center w-14 h-14 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors cursor-pointer"
-              aria-label="Previous image"
+              aria-label={videoSrc ? 'Previous video' : 'Previous image'}
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
@@ -123,7 +151,7 @@ export default function MarkerView({
                 onNext()
               }}
               className="fixed right-4 top-1/2 -translate-y-1/2 z-[51] flex items-center justify-center w-14 h-14 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors cursor-pointer"
-              aria-label="Next image"
+              aria-label={videoSrc ? 'Next video' : 'Next image'}
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -132,9 +160,9 @@ export default function MarkerView({
       )}
       <div className="text-sm text-level-4 space-y-1">
         <p>Altitude: {altitude}m</p>
-        {exif?.dateTimeOriginal && (
+        {dateTime && (
           <p>
-            Date: {new Date(exif.dateTimeOriginal).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+            Date: {new Date(dateTime).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
           </p>
         )}
       </div>

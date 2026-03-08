@@ -12,7 +12,7 @@ import { data } from '@/data'
 import RightPanel from '@/components/RightPanel'
 import MobileNotice from '@/components/MobileNotice'
 import mapboxgl from 'mapbox-gl'
-import type { MapSettings, TrekMarkerType } from '@/types'
+import type { MapSettings, RightPanelTabId, TrekMarkerType } from '@/types'
 import { DEFAULT_MAP_SETTINGS } from '@/types'
 import {
   DEFAULT_PANEL_WIDTH,
@@ -52,6 +52,7 @@ export default function MapPage() {
     typeof window !== 'undefined' ? loadSettings() : DEFAULT_MAP_SETTINGS,
   )
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null)
+  const [activeTab, setActiveTab] = useState<RightPanelTabId>('content')
   const [panelWidth, setPanelWidth] = useState(DEFAULT_PANEL_WIDTH)
   const [isResizing, setIsResizing] = useState(false)
   const layoutRef = useRef<HTMLDivElement>(null)
@@ -88,6 +89,7 @@ export default function MapPage() {
     initializeMap(map, {
       onMarkerClick: (marker: TrekMarkerType) => {
         setSelectedMarkerId(Number(marker.id))
+        setActiveTab('content')
         flyToMarker(map, Number(marker.id), data)
       },
     })
@@ -271,6 +273,8 @@ export default function MapPage() {
           onStartTrek={startTrek}
           settings={settings}
           onSettingsChange={handleSettingsChange}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
         />
       </div>
     </div>

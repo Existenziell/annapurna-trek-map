@@ -1,40 +1,27 @@
 import type { TrekMarker, TrekMarkerCollection, TrekMarkerType } from '@/types'
 import markersJson from './markers.json'
 
-const FIRST_MARKER_IMAGE = '1.jpg'
-
-function sqDist(a: TrekMarker, b: TrekMarker): number {
-  const [x1, y1] = a.coordinates
-  const [x2, y2] = b.coordinates
-  return (x1 - x2) ** 2 + (y1 - y2) ** 2
+function isVideoOnly(m: TrekMarker): boolean {
+  return Boolean(m.video && !m.image)
 }
 
-/** Order markers by nearest-neighbor path so Prev/Next follow the trek. Start from the marker with image "1.jpg". */
-function orderMarkersByPath(markers: TrekMarker[]): TrekMarker[] {
-  if (markers.length <= 1) return [...markers]
-  const startIdx = markers.findIndex((m) => m.image === FIRST_MARKER_IMAGE)
-  const start = startIdx >= 0 ? startIdx : 0
-  const ordered: TrekMarker[] = [markers[start]]
-  const remaining = markers.filter((_, i) => i !== start)
-  while (remaining.length > 0) {
-    const last = ordered[ordered.length - 1]
-    let bestIdx = 0
-    let bestSq = sqDist(last, remaining[0])
-    for (let i = 1; i < remaining.length; i++) {
-      const d = sqDist(last, remaining[i])
-      if (d < bestSq) {
-        bestSq = d
-        bestIdx = i
-      }
-    }
-    ordered.push(remaining[bestIdx])
-    remaining.splice(bestIdx, 1)
-  }
-  return ordered
+/** Order markers by dateTime ascending; video-only (no image) at the end. */
+function orderMarkersByDateTime(markers: TrekMarker[]): TrekMarker[] {
+  const withImage = markers.filter((m) => !isVideoOnly(m))
+  const videoOnly = markers.filter(isVideoOnly)
+  withImage.sort((a, b) => {
+    const da = a.dateTime ?? ''
+    const db = b.dateTime ?? ''
+    if (!da && !db) return 0
+    if (!da) return 1
+    if (!db) return -1
+    return da.localeCompare(db)
+  })
+  return [...withImage, ...videoOnly]
 }
 
 const rawMarkers = markersJson as TrekMarker[]
-const markers = orderMarkersByPath(rawMarkers)
+const markers = orderMarkersByDateTime(rawMarkers)
 
 export const data: TrekMarkerCollection = {
   type: 'FeatureCollection',
@@ -48,9 +35,9 @@ export const data: TrekMarkerCollection = {
         event_count: 1,
         venue: 'trek',
         ...(marker.image && { image: marker.image }),
-        ...(marker.dateTimeOriginal && {
-          exif: { dateTimeOriginal: marker.dateTimeOriginal },
-        }),
+        ...(marker.video && { video: marker.video }),
+        ...(marker.dateTime && { dateTime: marker.dateTime }),
+        ...(marker.desc !== undefined && { desc: marker.desc }),
       },
       geometry: {
         type: 'Point',

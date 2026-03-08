@@ -44,7 +44,7 @@ async function extractExif(imagePath) {
       if (!Number.isNaN(a)) altitude = Math.round(a)
     }
 
-    const dateTimeOriginal =
+    const dateTime =
       data.DateTimeOriginal != null
         ? (data.DateTimeOriginal instanceof Date
             ? data.DateTimeOriginal.toISOString()
@@ -54,12 +54,28 @@ async function extractExif(imagePath) {
     return {
       coordinates: [lng, lat],
       altitude,
-      ...(dateTimeOriginal && { dateTimeOriginal }),
+      ...(dateTime && { dateTime }),
     }
   } catch (err) {
     console.warn(`  ⚠ ${err.message}`)
     return null
   }
+}
+
+/** Order markers by dateTime ascending; video-only (no image) at the end. */
+function orderMarkersByDateTime(markers) {
+  const isVideoOnly = (m) => Boolean(m.video && !m.image)
+  const withImage = markers.filter((m) => !isVideoOnly(m))
+  const videoOnly = markers.filter(isVideoOnly)
+  withImage.sort((a, b) => {
+    const da = a.dateTime ?? ''
+    const db = b.dateTime ?? ''
+    if (!da && !db) return 0
+    if (!da) return 1
+    if (!db) return -1
+    return da.localeCompare(db)
+  })
+  return [...withImage, ...videoOnly]
 }
 
 async function main() {
@@ -119,10 +135,11 @@ async function main() {
     }
 
     const marker = {
+      image: imageKey,
+      ...(exifData.dateTime && { dateTime: exifData.dateTime }),
       altitude: exifData.altitude,
       coordinates: exifData.coordinates,
-      image: imageKey,
-      ...(exifData.dateTimeOriginal && { dateTimeOriginal: exifData.dateTimeOriginal }),
+      desc: '',
     }
     markers.push(marker)
     existingImages.add(imageKey)
@@ -130,7 +147,8 @@ async function main() {
   }
 
   if (added.length > 0) {
-    await writeFile(MARKERS_PATH, JSON.stringify(markers, null, 2) + '\n', 'utf8')
+    const sorted = orderMarkersByDateTime(markers)
+    await writeFile(MARKERS_PATH, JSON.stringify(sorted, null, 2) + '\n', 'utf8')
     console.log(`Added ${added.length} marker(s) to data/markers.json:`)
     added.forEach((n) => console.log(`  + ${n}`))
   } else {

@@ -6,7 +6,7 @@ export type MapboxMap = MapboxMapType
 
 /** EXIF data extracted from trek image (optional, from extract-exif script) */
 export interface MarkerExif {
-  dateTimeOriginal?: string
+  dateTime?: string
   gps?: { latitude: number; longitude: number; altitude?: number }
   make?: string
   model?: string
@@ -17,7 +17,9 @@ export interface TrekMarker {
   altitude: number
   coordinates: [number, number]
   image?: string
-  dateTimeOriginal?: string
+  video?: string
+  dateTime?: string
+  desc?: string
 }
 
 /** Properties on a trek marker (GeoJSON feature) */
@@ -27,6 +29,9 @@ export interface TrekMarkerProperties {
   event_count: number
   venue: string
   image?: string
+  video?: string
+  dateTime?: string
+  desc?: string
   exif?: MarkerExif
 }
 
@@ -141,6 +146,8 @@ export interface RightPanelProps {
   onStartTrek: () => void
   settings: MapSettings
   onSettingsChange: (settings: MapSettings) => void
+  activeTab: RightPanelTabId
+  onTabChange: (tab: RightPanelTabId) => void
 }
 
 /** Tab identifiers for the right panel */
