@@ -2,6 +2,7 @@ import type { MapboxMap, MapSettings } from '@/types'
 import {
   DEFAULT_CIRCLE_STROKE_COLOR,
   DEFAULT_SYMBOL_TEXT_COLOR,
+  SELECTED_MARKER_STROKE_COLOR,
 } from '@/lib/constants'
 
 export function applyLayerPaint(
@@ -69,6 +70,23 @@ export function applyLayerPaint(
       'event-count',
       'text-color',
       DEFAULT_SYMBOL_TEXT_COLOR,
+    )
+  }
+  if (map.getLayer('selected-marker')) {
+    map.setPaintProperty(
+      'selected-marker',
+      'circle-color',
+      settings.clusterColor,
+    )
+    map.setPaintProperty(
+      'selected-marker',
+      'circle-opacity',
+      settings.circleOpacity,
+    )
+    map.setPaintProperty(
+      'selected-marker',
+      'circle-stroke-color',
+      SELECTED_MARKER_STROKE_COLOR,
     )
   }
 }

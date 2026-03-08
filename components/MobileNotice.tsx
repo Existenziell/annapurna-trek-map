@@ -14,14 +14,14 @@ export default function MobileNotice() {
       aria-modal="true"
       aria-labelledby="mobile-notice-title"
     >
-      <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
+      <div className="w-full max-w-sm rounded-lg bg-level-2 p-6 shadow-xl">
         <h2
           id="mobile-notice-title"
-          className="text-lg font-medium text-gray-900 dark:text-gray-100"
+          className="text-lg font-medium text-level-6"
         >
           Optimized for desktop
         </h2>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+        <p className="mt-2 text-sm text-level-4">
           This app works best on a larger screen. You can continue here, but
           for the best experience we recommend using a desktop or tablet.
         </p>

@@ -7,6 +7,7 @@ import { DEFAULT_MAP_LAYER_OPTIONS } from '@/types'
 import {
   DEFAULT_CIRCLE_STROKE_COLOR,
   DEFAULT_SYMBOL_TEXT_COLOR,
+  SELECTED_MARKER_STROKE_COLOR,
 } from '@/lib/constants'
 
 function addTerrain(map: MapboxMap, options: MapLayerOptions): void {
@@ -95,6 +96,23 @@ function addTrekLayers(
       'circle-stroke-width': 4,
       'circle-stroke-color': DEFAULT_CIRCLE_STROKE_COLOR,
       'circle-stroke-opacity': options.clusterStrokeOpacity,
+    },
+  })
+
+  // Selected marker: drawn before event-count so the number label stays on top.
+  // Use ['id'] for feature's top-level id (not ['get', 'id'] which reads properties).
+  map.addLayer({
+    id: 'selected-marker',
+    type: 'circle',
+    source: 'trek',
+    filter: ['all', ['!', ['has', 'point_count']], ['==', ['id'], -1]],
+    paint: {
+      'circle-radius': 28,
+      'circle-color': options.clusterColor,
+      'circle-opacity': options.circleOpacity,
+      'circle-stroke-width': 5,
+      'circle-stroke-color': SELECTED_MARKER_STROKE_COLOR,
+      'circle-stroke-opacity': 1,
     },
   })
 

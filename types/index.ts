@@ -4,10 +4,20 @@ import { SVGProps } from 'react'
 /** Mapbox map instance used across lib and hooks */
 export type MapboxMap = MapboxMapType
 
+/** EXIF data extracted from trek image (optional, from extract-exif script) */
+export interface MarkerExif {
+  dateTimeOriginal?: string
+  gps?: { latitude: number; longitude: number; altitude?: number }
+  make?: string
+  model?: string
+}
+
 /** Single trek marker (raw data before GeoJSON) */
 export interface TrekMarker {
   altitude: number
   coordinates: [number, number]
+  image?: string
+  exif?: MarkerExif
 }
 
 /** Properties on a trek marker (GeoJSON feature) */
@@ -16,6 +26,8 @@ export interface TrekMarkerProperties {
   cluster: boolean
   event_count: number
   venue: string
+  image?: string
+  exif?: MarkerExif
 }
 
 /** Trek point marker (GeoJSON Feature with our properties) */
@@ -132,7 +144,7 @@ export interface RightPanelProps {
 }
 
 /** Tab identifiers for the right panel */
-export type RightPanelTabId = 'content' | 'settings' | 'controls'
+export type RightPanelTabId = 'content' | 'settings'
 
 /** Props for the SettingsTab component */
 export interface SettingsTabProps {

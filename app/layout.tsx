@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import 'tailwindcss/tailwind.css'
 import '@/styles/globals.css'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
   title: 'Annapurna Circuit Trek | christof.digital',
@@ -20,11 +21,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="flex h-screen flex-col overflow-hidden">
-        <main className="flex min-h-0 flex-1 flex-col w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-gray-900 dark:text-gray-300">
-          {children}
-        </main>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "(function(){var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);})();",
+          }}
+        />
+        <ThemeProvider>
+          <main className="flex min-h-0 flex-1 flex-col w-full text-center bg-level-1 text-level-5 bg-cloth-pattern bg-repeat dark:bg-none">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )

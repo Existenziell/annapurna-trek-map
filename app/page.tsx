@@ -28,6 +28,8 @@ export default function MapPage() {
   )
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null)
   const lastAppliedStyleRef = useRef<string | null>(null)
+  const selectedMarkerIdRef = useRef<number | null>(null)
+  selectedMarkerIdRef.current = selectedMarkerId
 
   const { mapRef, isReady, error } = useMapboxMap(MAP_CONTAINER_ID, {
     style: settings.mapStyle,
@@ -80,11 +82,31 @@ export default function MapPage() {
         if (!mapRef.current) return
         addDataLayer(mapRef.current, data, settings)
         lastAppliedStyleRef.current = settings.mapStyle
+        const id = selectedMarkerIdRef.current
+        if (mapRef.current.getLayer('selected-marker')) {
+          mapRef.current.setFilter('selected-marker', [
+            'all',
+            ['!', ['has', 'point_count']],
+            ['==', ['id'], id ?? -1],
+          ])
+        }
       })
       return
     }
     applyLayerPaint(map, settings)
   }, [isReady, mapRef, settings])
+
+  useEffect(() => {
+    if (!mapRef.current || !isReady) return
+    const map = mapRef.current
+    if (!map.getLayer('selected-marker')) return
+    const id = selectedMarkerId ?? -1
+    map.setFilter('selected-marker', [
+      'all',
+      ['!', ['has', 'point_count']],
+      ['==', ['id'], id],
+    ])
+  }, [selectedMarkerId, isReady, mapRef])
 
   function handleSettingsChange(newSettings: MapSettings) {
     setSettings(newSettings)
@@ -92,18 +114,21 @@ export default function MapPage() {
   }
 
   function goPrev() {
-    if (selectedMarkerId == null || selectedMarkerId <= 1) return
-    const nextId = selectedMarkerId - 1
-    setSelectedMarkerId(nextId)
-    if (mapRef.current) flyToMarker(mapRef.current, nextId, data)
+    if (selectedMarkerId == null) return
+    const index = data.features.findIndex((f) => f.id === selectedMarkerId)
+    if (index <= 0) return
+    const prevMarker = data.features[index - 1]
+    setSelectedMarkerId(prevMarker.id)
+    if (mapRef.current) flyToMarker(mapRef.current, prevMarker.id, data)
   }
 
   function goNext() {
-    if (selectedMarkerId == null || selectedMarkerId >= data.features.length)
-      return
-    const nextId = selectedMarkerId + 1
-    setSelectedMarkerId(nextId)
-    if (mapRef.current) flyToMarker(mapRef.current, nextId, data)
+    if (selectedMarkerId == null) return
+    const index = data.features.findIndex((f) => f.id === selectedMarkerId)
+    if (index < 0 || index >= data.features.length - 1) return
+    const nextMarker = data.features[index + 1]
+    setSelectedMarkerId(nextMarker.id)
+    if (mapRef.current) flyToMarker(mapRef.current, nextMarker.id, data)
   }
 
   function startTrek() {
@@ -120,7 +145,7 @@ export default function MapPage() {
   }
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-row">
+    <div className="relative flex min-h-0 flex-1 flex-col md:flex-row">
       <MobileNotice />
       <div
         id={MAP_CONTAINER_ID}

@@ -68,7 +68,7 @@ describe('addDataLayer', () => {
     )
   })
 
-  it('adds sky, clusters, cluster-count, unclustered-point, and event-count layers', () => {
+  it('adds sky, clusters, cluster-count, unclustered-point, event-count, and selected-marker layers', () => {
     addDataLayer(mockMap as never, mockMarkerCollection)
     const layerIds = mockMap.addLayer.mock.calls.map((c) => c[0].id)
     expect(layerIds).toContain('sky')
@@ -76,7 +76,8 @@ describe('addDataLayer', () => {
     expect(layerIds).toContain('cluster-count')
     expect(layerIds).toContain('unclustered-point')
     expect(layerIds).toContain('event-count')
-    expect(mockMap.addLayer).toHaveBeenCalledTimes(5)
+    expect(layerIds).toContain('selected-marker')
+    expect(mockMap.addLayer).toHaveBeenCalledTimes(6)
   })
 
   it('uses custom options when provided', () => {

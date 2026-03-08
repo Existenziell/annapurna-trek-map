@@ -27,10 +27,13 @@ export const INTRO_FLY_DURATION_MS = 5000
 export const INTRO_FLY_CURVE = 0.8
 
 /** Duration of marker-to-marker fly animation (ms) */
-export const FLY_DURATION_MS = 2000
+export const FLY_DURATION_MS = 4000
 
-/** Curve for marker-to-marker fly (higher = zoom out then in) */
-export const FLY_CURVE = 2.25
+/** Curve for marker-to-marker fly (higher = zoom out more during transition, then zoom in) */
+export const FLY_CURVE = 3.5
+
+/** Zoom level when arriving at a marker (tight on the point) */
+export const MARKER_ZOOM = 14.5
 
 /** localStorage key for persisted map settings */
 export const SETTINGS_STORAGE_KEY = 'annapurna-trek-map-settings'
@@ -43,6 +46,9 @@ export const DEFAULT_CIRCLE_STROKE_COLOR = '#fff'
 
 /** Fixed text colour for marker labels (not user-configurable) */
 export const DEFAULT_SYMBOL_TEXT_COLOR = '#ffffff'
+
+/** Stroke colour for the selected trek marker (neon yellow for visibility) */
+export const SELECTED_MARKER_STROKE_COLOR = '#ccff00'
 
 /** Final camera view after intro (center, zoom, pitch) */
 export const FINAL_VIEW = {

@@ -1,5 +1,5 @@
 import type { MapboxMap, TrekMarkerCollection } from '@/types'
-import { FLY_CURVE, FLY_DURATION_MS } from '@/lib/constants'
+import { FLY_CURVE, FLY_DURATION_MS, MARKER_ZOOM } from '@/lib/constants'
 
 export function flyToMarker(
   map: MapboxMap,
@@ -11,6 +11,7 @@ export function flyToMarker(
   const [lng, lat] = marker.geometry.coordinates
   map.flyTo({
     center: [lng, lat],
+    zoom: MARKER_ZOOM,
     duration: FLY_DURATION_MS,
     curve: FLY_CURVE,
     essential: true,

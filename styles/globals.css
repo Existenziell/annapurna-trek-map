@@ -4,14 +4,43 @@ Style Sheet for annapurna-trek-map
 
 @import url("https://fonts.googleapis.com/css?family=Gotu&display=swap");
 
-:root {
-  --color-accent: #a6d1c9;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Light theme (slate) */
+:root {
+  --level-1: #f8fafc;
+  --level-2: #f1f5f9;
+  --level-3: #e2e8f0;
+  --level-4: #475569;
+  --level-5: #0f172a;
+  --level-6: #020617;
+  --accent: #5a7a9a;
+  --color-error: #dc2626;
+  --color-warning: #d97706;
+  --color-success: #059669;
+  --tooltip-bg: rgba(255, 255, 255, 0.95);
+  --tooltip-border: #e5e7eb;
+  --tooltip-text: #0f172a;
+}
+
+/* Dark theme */
+.dark {
+  --level-1: #1f2127;
+  --level-2: #1a1c21;
+  --level-3: #22242b;
+  --level-4: #7e889f;
+  --level-5: #b8c0d4;
+  --level-6: #e2e8f2;
+  --accent: #5a7a9a;
+  --color-error: #f87171;
+  --color-warning: #fbbf24;
+  --color-success: #34d399;
+  --tooltip-bg: #1a1c21;
+  --tooltip-border: #22242b;
+  --tooltip-text: #b8c0d4;
+}
 
 /* ==========================================================================
 	General overrides and utilities
@@ -22,9 +51,9 @@ html, body {
 }
 
 .button {
-  @apply bg-gray-800 hover:text-accent py-2 px-4 rounded shadow-lg transition-all cursor-pointer
-    hover:shadow-sm text-white dark:bg-accent dark:text-gray-800
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800;
+  @apply bg-level-5 hover:text-accent text-level-1 py-2 px-4 rounded shadow-lg transition-all cursor-pointer
+    hover:shadow-sm dark:bg-accent dark:text-level-5
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-level-5;
 }
 
 .link {
@@ -39,6 +68,49 @@ html, body {
   @apply cursor-not-allowed;
 }
 
+.card {
+  @apply rounded-lg border border-level-3 bg-level-2 p-4 shadow-sm;
+}
+
+/* ==========================================================================
+	Form controls (accent styling)
+	========================================================================== */
+
+@layer components {
+  .input-text {
+    @apply w-full rounded border border-level-3 bg-level-2 px-3 py-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
+  }
+
+  .input-number {
+    @apply w-full rounded border border-level-3 bg-level-2 px-3 py-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  .input-number::-webkit-inner-spin-button,
+  .input-number::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .input-select {
+    @apply w-full rounded border border-level-3 bg-level-2 px-3 py-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
+  }
+
+  .input-range {
+    @apply w-full accent-accent;
+  }
+
+  .input-checkbox {
+    @apply accent-accent;
+  }
+
+  .input-radio {
+    @apply accent-accent;
+  }
+}
 
 /* ==========================================================================
 	Mapbox overrides

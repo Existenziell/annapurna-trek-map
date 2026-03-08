@@ -14,6 +14,8 @@ export const data: TrekMarkerCollection = {
         cluster: false,
         event_count: 1,
         venue: 'trek',
+        ...(marker.image && { image: marker.image }),
+        ...(marker.exif && { exif: marker.exif }),
       },
       geometry: {
         type: 'Point',

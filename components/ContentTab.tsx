@@ -11,9 +11,9 @@ export default function ContentTab({
 }: ContentTabProps) {
   if (!selectedMarker) {
     return (
-      <div className="flex flex-col gap-6">
-        <h2 className="text-lg font-medium">Namaste,</h2>
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+      <div className="flex flex-col gap-6 card max-w-md mx-auto">
+        <h2 className="text-xl font-medium text-level-6">Namaste,</h2>
+        <p className="text-level-4 leading-relaxed">
           This is the Annapurna Circuit, one of the most stunning routes in the
           Himalayas. A trek between 160-230 km long encircling the Annapurna
           Massif in Central Nepal. I walked this trek solo in November 2019 and
@@ -26,7 +26,7 @@ export default function ContentTab({
         >
           Start trek
         </button>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-level-4">
           Or click a marker on the map to view details.
         </p>
       </div>

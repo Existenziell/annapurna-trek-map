@@ -25,6 +25,7 @@ const fixtureMarker: TrekMarkerType = {
     cluster: false,
     event_count: 1,
     venue: 'trek',
+    image: '2.jpg',
   },
   geometry: {
     type: 'Point',
@@ -55,7 +56,23 @@ describe('ContentTab', () => {
       />,
     )
     expect(screen.getByAltText(/trek stop 2/i)).toBeInTheDocument()
+    expect(screen.getByRole('img')).toHaveAttribute('src', '/trek/2.jpg')
     expect(screen.queryByText(/namaste/i)).not.toBeInTheDocument()
+  })
+
+  it('shows placeholder when marker has no image', () => {
+    const markerWithoutImage: TrekMarkerType = {
+      ...fixtureMarker,
+      properties: { ...fixtureMarker.properties, image: undefined },
+    }
+    render(
+      <ContentTab
+        {...noMarkerProps}
+        selectedMarker={markerWithoutImage}
+      />,
+    )
+    expect(screen.getByText(/no image/i)).toBeInTheDocument()
+    expect(screen.queryByRole('img')).not.toBeInTheDocument()
   })
 
   it('calls onPrev when Prev is clicked and marker is selected', () => {
