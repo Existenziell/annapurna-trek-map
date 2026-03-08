@@ -63,7 +63,7 @@ export default function MarkerDetail({
         <p>Altitude: {altitude}m</p>
         {exif?.dateTimeOriginal && (
           <p>
-            Photo: {new Date(exif.dateTimeOriginal).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+            Date: {new Date(exif.dateTimeOriginal).toLocaleDateString(undefined, { dateStyle: 'medium' })}
           </p>
         )}
       </div>
