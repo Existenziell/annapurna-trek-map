@@ -900,15 +900,6 @@
     "image": "79.jpg"
   },
   {
-    "altitude": 4104,
-    "coordinates": [
-      83.97089444444444,
-      28.728291666666664
-    ],
-    "image": "IMG_9358.JPG",
-    "dateTimeOriginal": "2019-11-25T09:55:40.000Z"
-  },
-  {
     "altitude": 4108,
     "coordinates": [
       83.970894,
@@ -1318,8 +1309,8 @@
   {
     "altitude": 528,
     "coordinates": [
-      28.224815,
-      84.376980
+      84.376980,
+      28.224815
     ],
     "image": "IMG_7777.JPG",
     "dateTimeOriginal": "2019-08-23T04:09:46.000Z"
