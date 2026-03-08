@@ -4,6 +4,7 @@ import type {
   MapLayerMouseEvent,
   MapMouseEvent,
 } from 'mapbox-gl'
+import { Popup } from 'mapbox-gl'
 import type { InitializeMapOptions, TrekMarkerType } from '@/types'
 
 function getTrekSource(
@@ -70,5 +71,16 @@ export function initializeMap(
   })
   map.on('mouseleave', 'clusters', () => {
     map.getCanvas().style.cursor = ''
+  })
+
+  map.on('contextmenu', (e: MapMouseEvent) => {
+    e.preventDefault()
+    const { lng, lat } = e.lngLat
+    new Popup({ closeButton: true, closeOnClick: false })
+      .setLngLat([lng, lat])
+      .setHTML(
+        `<div class="text-sm"><strong>Longitude</strong> ${lng.toFixed(6)}<br/><strong>Latitude</strong> ${lat.toFixed(6)}</div>`,
+      )
+      .addTo(map)
   })
 }
