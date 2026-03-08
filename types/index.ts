@@ -116,8 +116,8 @@ export interface StoredSettings {
   settings: MapSettings
 }
 
-/** Props for the MarkerDetail component */
-export interface MarkerDetailProps {
+/** Props for the MarkerView component */
+export interface MarkerViewProps {
   marker: TrekMarkerType
   onPrev: () => void
   onNext: () => void

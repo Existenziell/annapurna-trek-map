@@ -1,7 +1,7 @@
 'use client'
 
 import type { ContentTabProps } from '@/types'
-import MarkerDetail, { MAX_MARKER_ID } from '@/components/MarkerDetail'
+import MarkerView, { MAX_MARKER_ID } from '@/components/MarkerView'
 
 export default function ContentTab({
   selectedMarker,
@@ -34,7 +34,7 @@ export default function ContentTab({
   }
 
   return (
-    <MarkerDetail
+    <MarkerView
       marker={selectedMarker}
       onPrev={onPrev}
       onNext={onNext}
