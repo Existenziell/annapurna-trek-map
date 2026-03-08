@@ -35,6 +35,18 @@ export const FLY_CURVE = 3.5
 /** Zoom level when arriving at a marker (tight on the point) */
 export const MARKER_ZOOM = 14.5
 
+/** Min zoom when flying to a marker (short hops stay more zoomed out) */
+export const MARKER_ZOOM_MIN = 11
+
+/** Max zoom when flying to a marker (tight clusters can zoom in further) */
+export const MARKER_ZOOM_MAX = 17
+
+/** Distance (m) above which we use full MARKER_ZOOM; below this we scale down. */
+export const MARKER_ZOOM_REF_DISTANCE_M = 3000
+
+/** Reference distance (m) for cluster zoom; markers closer than this need higher zoom to separate. */
+export const MARKER_CLUSTER_REF_DISTANCE_M = 250
+
 /** localStorage key for persisted map settings */
 export const SETTINGS_STORAGE_KEY = 'annapurna-trek-map-settings'
 

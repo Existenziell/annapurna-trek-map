@@ -208,7 +208,10 @@ export default function MapPage() {
     if (index <= 0) return
     const prevMarker = data.features[index - 1]
     setSelectedMarkerId(prevMarker.id)
-    if (mapRef.current) flyToMarker(mapRef.current, prevMarker.id, data)
+    if (mapRef.current)
+      flyToMarker(mapRef.current, prevMarker.id, data, {
+        fromMarkerId: selectedMarkerId,
+      })
   }
 
   function goNext() {
@@ -217,7 +220,10 @@ export default function MapPage() {
     if (index < 0 || index >= data.features.length - 1) return
     const nextMarker = data.features[index + 1]
     setSelectedMarkerId(nextMarker.id)
-    if (mapRef.current) flyToMarker(mapRef.current, nextMarker.id, data)
+    if (mapRef.current)
+      flyToMarker(mapRef.current, nextMarker.id, data, {
+        fromMarkerId: selectedMarkerId,
+      })
   }
 
   function startTrek() {
