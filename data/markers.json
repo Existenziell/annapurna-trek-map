@@ -10,10 +10,11 @@
   {
     "altitude": 800,
     "coordinates": [
-      84.365696,
-      28.257915
+      84.382455,
+      28.224276
     ],
-    "image": "2.jpg"
+    "image": "2.jpg",
+    "dateTimeOriginal": "2019-11-08T17:10:10.000Z"
   },
   {
     "altitude": 818,
@@ -1281,8 +1282,8 @@
   {
     "altitude": 808,
     "coordinates": [
-      83.943475,
-      28.22787222222222
+      84.401546,
+      28.314191
     ],
     "image": "IMG_9690.JPG",
     "dateTimeOriginal": "2019-12-24T07:35:54.000Z"
@@ -1326,20 +1327,11 @@
   {
     "altitude": 528,
     "coordinates": [
-      84.19274166666668,
-      27.9845
+      28.224815,
+      84.376980
     ],
     "image": "IMG_7777.JPG",
     "dateTimeOriginal": "2019-08-23T04:09:46.000Z"
-  },
-  {
-    "altitude": 1373,
-    "coordinates": [
-      85.19898888888889,
-      27.71334722222222
-    ],
-    "image": "IMG_8105.jpg",
-    "dateTimeOriginal": "2019-09-03T14:57:32.000Z"
   },
   {
     "altitude": 1315,
