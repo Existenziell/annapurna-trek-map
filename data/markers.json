@@ -16,7 +16,7 @@
     "image": "2.jpg"
   },
   {
-    "altitude": 817.5,
+    "altitude": 818,
     "coordinates": [
       84.377603,
       28.292464
@@ -24,7 +24,7 @@
     "image": "7.jpg"
   },
   {
-    "altitude": 1011.6,
+    "altitude": 1012,
     "coordinates": [
       84.401635,
       28.387061
@@ -32,12 +32,29 @@
     "image": "4.jpg"
   },
   {
-    "altitude": 1220.3,
+    "altitude": 1294,
     "coordinates": [
-      84.408028,
-      28.413297
+      84.406783,
+      28.413211
     ],
-    "image": "5.jpg"
+    "image": "9.jpg"
+  },
+  {
+    "altitude": 1296,
+    "coordinates": [
+      84.406997,
+      28.413342
+    ],
+    "image": "10.jpg"
+  },
+  {
+    "altitude": 1314,
+    "coordinates": [
+      84.4071888888889,
+      28.414247222222222
+    ],
+    "image": "IMG_8872.jpg",
+    "dateTimeOriginal": "2019-11-13T14:14:25.000Z"
   },
   {
     "altitude": 1224,
@@ -48,28 +65,38 @@
     "image": "8.jpg"
   },
   {
-    "altitude": 1294.3,
+    "altitude": 1220,
     "coordinates": [
-      84.406783,
-      28.413211
+      84.408028,
+      28.413297
     ],
-    "image": "9.jpg"
+    "image": "5.jpg"
   },
   {
-    "altitude": 1296.2,
-    "coordinates": [
-      84.406997,
-      28.413342
-    ],
-    "image": "10.jpg"
-  },
-  {
-    "altitude": 1377.5,
+    "altitude": 1378,
     "coordinates": [
       84.375778,
       28.4525
     ],
     "image": "6.jpg"
+  },
+  {
+    "altitude": 1378,
+    "coordinates": [
+      84.37577777777777,
+      28.4525
+    ],
+    "image": "127.jpg",
+    "dateTimeOriginal": "2019-11-15T11:03:53.000Z"
+  },
+  {
+    "altitude": 1563,
+    "coordinates": [
+      84.37280277777776,
+      28.458941666666664
+    ],
+    "image": "IMG_8889.JPG",
+    "dateTimeOriginal": "2019-11-15T11:27:14.000Z"
   },
   {
     "altitude": 1661,
@@ -80,12 +107,45 @@
     "image": "12.jpg"
   },
   {
+    "altitude": 1628,
+    "coordinates": [
+      84.371881,
+      28.463
+    ],
+    "image": "15.jpg"
+  },
+  {
     "altitude": 1621,
     "coordinates": [
       84.373672,
       28.468578
     ],
     "image": "13.jpg"
+  },
+  {
+    "altitude": 1673,
+    "coordinates": [
+      84.37435277777777,
+      28.46962222222222
+    ],
+    "image": "IMG_8899.JPG",
+    "dateTimeOriginal": "2019-11-15T15:13:49.000Z"
+  },
+  {
+    "altitude": 1670,
+    "coordinates": [
+      84.374367,
+      28.469653
+    ],
+    "image": "16.jpg"
+  },
+  {
+    "altitude": 1677,
+    "coordinates": [
+      84.374336,
+      28.469853
+    ],
+    "image": "17.jpg"
   },
   {
     "altitude": 1702,
@@ -96,22 +156,6 @@
     "image": "14.jpg"
   },
   {
-    "altitude": 1627.7,
-    "coordinates": [
-      84.371881,
-      28.463
-    ],
-    "image": "15.jpg"
-  },
-  {
-    "altitude": 1669.5,
-    "coordinates": [
-      84.374367,
-      28.469653
-    ],
-    "image": "16.jpg"
-  },
-  {
     "altitude": 1352,
     "coordinates": [
       84.3615,
@@ -120,15 +164,16 @@
     "image": "11.jpg"
   },
   {
-    "altitude": 1677.3,
+    "altitude": 1769,
     "coordinates": [
-      84.374336,
-      28.469853
+      84.35875,
+      28.51621
     ],
-    "image": "17.jpg"
+    "image": "19_2.jpg",
+    "dateTimeOriginal": "2019-12-14T14:51:57.000Z"
   },
   {
-    "altitude": 1769.4,
+    "altitude": 1769,
     "coordinates": [
       84.35875,
       28.516211
@@ -136,7 +181,7 @@
     "image": "18.jpg"
   },
   {
-    "altitude": 1841.2,
+    "altitude": 1841,
     "coordinates": [
       84.358703,
       28.516311
@@ -144,7 +189,16 @@
     "image": "19.jpg"
   },
   {
-    "altitude": 1824.1,
+    "altitude": 1841,
+    "coordinates": [
+      84.35870277777778,
+      28.51631111111111
+    ],
+    "image": "IMG_8906.JPG",
+    "dateTimeOriginal": "2019-11-17T10:48:51.000Z"
+  },
+  {
+    "altitude": 1824,
     "coordinates": [
       84.355583,
       28.526017
@@ -152,7 +206,7 @@
     "image": "20.jpg"
   },
   {
-    "altitude": 1859.2,
+    "altitude": 1859,
     "coordinates": [
       84.350617,
       28.532228
@@ -160,7 +214,16 @@
     "image": "21.jpg"
   },
   {
-    "altitude": 2174.9,
+    "altitude": 2015,
+    "coordinates": [
+      84.34908333333333,
+      28.532755555555553
+    ],
+    "image": "IMG_8909.jpg",
+    "dateTimeOriginal": "2019-11-17T12:51:48.000Z"
+  },
+  {
+    "altitude": 2175,
     "coordinates": [
       84.337547,
       28.535922
@@ -168,7 +231,7 @@
     "image": "22.jpg"
   },
   {
-    "altitude": 2131.5,
+    "altitude": 2132,
     "coordinates": [
       84.3368,
       28.535928
@@ -176,7 +239,16 @@
     "image": "23.jpg"
   },
   {
-    "altitude": 2464.7,
+    "altitude": 2158,
+    "coordinates": [
+      84.33621944444444,
+      28.53602777777778
+    ],
+    "image": "IMG_8921.JPG",
+    "dateTimeOriginal": "2019-11-18T08:27:26.000Z"
+  },
+  {
+    "altitude": 2465,
     "coordinates": [
       84.317725,
       28.526067
@@ -184,7 +256,7 @@
     "image": "24.jpg"
   },
   {
-    "altitude": 2527.6,
+    "altitude": 2528,
     "coordinates": [
       84.309928,
       28.526347
@@ -192,7 +264,16 @@
     "image": "25.jpg"
   },
   {
-    "altitude": 2576.4,
+    "altitude": 2533,
+    "coordinates": [
+      84.309927,
+      28.526347
+    ],
+    "image": "25_1.jpg",
+    "dateTimeOriginal": "2019-12-14T14:51:57.000Z"
+  },
+  {
+    "altitude": 2576,
     "coordinates": [
       84.269333,
       28.551406
@@ -200,7 +281,7 @@
     "image": "26.jpg"
   },
   {
-    "altitude": 2439.3,
+    "altitude": 2439,
     "coordinates": [
       84.267144,
       28.551647
@@ -216,7 +297,7 @@
     "image": "28.jpg"
   },
   {
-    "altitude": 2799.5,
+    "altitude": 2800,
     "coordinates": [
       84.241111,
       28.552086
@@ -224,7 +305,16 @@
     "image": "29.jpg"
   },
   {
-    "altitude": 2785.5,
+    "altitude": 2786,
+    "coordinates": [
+      84.24103611111111,
+      28.552058333333335
+    ],
+    "image": "IMG_8941.JPG",
+    "dateTimeOriginal": "2019-11-20T06:55:40.000Z"
+  },
+  {
+    "altitude": 2786,
     "coordinates": [
       84.241036,
       28.552058
@@ -240,7 +330,7 @@
     "image": "31.jpg"
   },
   {
-    "altitude": 3158.8,
+    "altitude": 3159,
     "coordinates": [
       84.171769,
       28.604947
@@ -248,7 +338,7 @@
     "image": "32.jpg"
   },
   {
-    "altitude": 3200.2,
+    "altitude": 3200,
     "coordinates": [
       84.166214,
       28.608344
@@ -256,7 +346,7 @@
     "image": "33.jpg"
   },
   {
-    "altitude": 3225.2,
+    "altitude": 3225,
     "coordinates": [
       84.159394,
       28.611403
@@ -264,44 +354,20 @@
     "image": "34.jpg"
   },
   {
-    "altitude": 3301.2,
-    "coordinates": [
-      84.153214,
-      28.615908
-    ],
-    "image": "35.jpg"
-  },
-  {
-    "altitude": 3284,
-    "coordinates": [
-      84.153306,
-      28.616047
-    ],
-    "image": "36.jpg"
-  },
-  {
-    "altitude": 3278.1,
-    "coordinates": [
-      84.153306,
-      28.616147
-    ],
-    "image": "37.jpg"
-  },
-  {
-    "altitude": 3340.1,
-    "coordinates": [
-      84.154053,
-      28.616081
-    ],
-    "image": "38.jpg"
-  },
-  {
-    "altitude": 3357.4,
+    "altitude": 3357,
     "coordinates": [
       84.154281,
       28.615989
     ],
     "image": "39.jpg"
+  },
+  {
+    "altitude": 3340,
+    "coordinates": [
+      84.154053,
+      28.616081
+    ],
+    "image": "38.jpg"
   },
   {
     "altitude": 3334,
@@ -312,7 +378,7 @@
     "image": "40.jpg"
   },
   {
-    "altitude": 3321.9,
+    "altitude": 3322,
     "coordinates": [
       84.153411,
       28.615967
@@ -320,7 +386,31 @@
     "image": "41.jpg"
   },
   {
-    "altitude": 3602.1,
+    "altitude": 3284,
+    "coordinates": [
+      84.153306,
+      28.616047
+    ],
+    "image": "36.jpg"
+  },
+  {
+    "altitude": 3278,
+    "coordinates": [
+      84.153306,
+      28.616147
+    ],
+    "image": "37.jpg"
+  },
+  {
+    "altitude": 3301,
+    "coordinates": [
+      84.153214,
+      28.615908
+    ],
+    "image": "35.jpg"
+  },
+  {
+    "altitude": 3602,
     "coordinates": [
       84.1382,
       28.639286
@@ -328,7 +418,7 @@
     "image": "42.jpg"
   },
   {
-    "altitude": 3655.9,
+    "altitude": 3656,
     "coordinates": [
       84.137383,
       28.640106
@@ -336,7 +426,7 @@
     "image": "43.jpg"
   },
   {
-    "altitude": 3697.9,
+    "altitude": 3698,
     "coordinates": [
       84.1372,
       28.640828
@@ -344,7 +434,7 @@
     "image": "44.jpg"
   },
   {
-    "altitude": 3623.8,
+    "altitude": 3624,
     "coordinates": [
       84.134575,
       28.645869
@@ -352,7 +442,7 @@
     "image": "45.jpg"
   },
   {
-    "altitude": 3715.6,
+    "altitude": 3716,
     "coordinates": [
       84.134086,
       28.646161
@@ -360,15 +450,7 @@
     "image": "46.jpg"
   },
   {
-    "altitude": 3739.1,
-    "coordinates": [
-      84.133583,
-      28.646403
-    ],
-    "image": "47.jpg"
-  },
-  {
-    "altitude": 3728.7,
+    "altitude": 3729,
     "coordinates": [
       84.133597,
       28.646367
@@ -376,7 +458,15 @@
     "image": "48.jpg"
   },
   {
-    "altitude": 3733.1,
+    "altitude": 3739,
+    "coordinates": [
+      84.133583,
+      28.646403
+    ],
+    "image": "47.jpg"
+  },
+  {
+    "altitude": 3733,
     "coordinates": [
       84.131111,
       28.644728
@@ -384,15 +474,25 @@
     "image": "49.jpg"
   },
   {
-    "altitude": 3730.2,
+    "altitude": 3723,
     "coordinates": [
-      84.116058,
-      28.641461
+      84.130775,
+      28.64408611111111
     ],
-    "image": "50.jpg"
+    "image": "IMG_8999.JPG",
+    "dateTimeOriginal": "2019-11-21T11:30:08.000Z"
   },
   {
-    "altitude": 3729.2,
+    "altitude": 3710,
+    "coordinates": [
+      84.11618055555554,
+      28.64133888888889
+    ],
+    "image": "IMG_9003.JPG",
+    "dateTimeOriginal": "2019-11-21T12:29:46.000Z"
+  },
+  {
+    "altitude": 3729,
     "coordinates": [
       84.116103,
       28.641286
@@ -400,7 +500,15 @@
     "image": "51.jpg"
   },
   {
-    "altitude": 3699.7,
+    "altitude": 3730,
+    "coordinates": [
+      84.116058,
+      28.641461
+    ],
+    "image": "50.jpg"
+  },
+  {
+    "altitude": 3700,
     "coordinates": [
       84.109139,
       28.645081
@@ -408,7 +516,7 @@
     "image": "52.jpg"
   },
   {
-    "altitude": 3672.1,
+    "altitude": 3672,
     "coordinates": [
       84.104972,
       28.644967
@@ -424,7 +532,7 @@
     "image": "54.jpg"
   },
   {
-    "altitude": 3673.3,
+    "altitude": 3673,
     "coordinates": [
       84.101075,
       28.648975
@@ -432,7 +540,16 @@
     "image": "55.jpg"
   },
   {
-    "altitude": 3748.1,
+    "altitude": 3700,
+    "coordinates": [
+      84.0952587,
+      28.656845999999998
+    ],
+    "image": "chris.jpg",
+    "dateTimeOriginal": "2019-11-22T10:20:30.000Z"
+  },
+  {
+    "altitude": 3748,
     "coordinates": [
       84.0952,
       28.656917
@@ -440,7 +557,7 @@
     "image": "56.jpg"
   },
   {
-    "altitude": 3710.2,
+    "altitude": 3710,
     "coordinates": [
       84.091981,
       28.656522
@@ -456,7 +573,16 @@
     "image": "58.jpg"
   },
   {
-    "altitude": 3612.6,
+    "altitude": 3694,
+    "coordinates": [
+      84.09137777777778,
+      28.656641666666665
+    ],
+    "image": "IMG_9015.JPG",
+    "dateTimeOriginal": "2019-11-22T10:36:55.000Z"
+  },
+  {
+    "altitude": 3613,
     "coordinates": [
       84.0896,
       28.657069
@@ -464,7 +590,7 @@
     "image": "59.jpg"
   },
   {
-    "altitude": 3482.3,
+    "altitude": 3482,
     "coordinates": [
       84.082489,
       28.65265
@@ -472,7 +598,7 @@
     "image": "60.jpg"
   },
   {
-    "altitude": 3454.9,
+    "altitude": 3455,
     "coordinates": [
       84.078056,
       28.649717
@@ -480,7 +606,7 @@
     "image": "61.jpg"
   },
   {
-    "altitude": 3460.2,
+    "altitude": 3460,
     "coordinates": [
       84.057725,
       28.6478
@@ -488,7 +614,7 @@
     "image": "62.jpg"
   },
   {
-    "altitude": 3461.6,
+    "altitude": 3462,
     "coordinates": [
       84.056756,
       28.648158
@@ -496,7 +622,7 @@
     "image": "63.jpg"
   },
   {
-    "altitude": 3442.1,
+    "altitude": 3442,
     "coordinates": [
       84.053878,
       28.649422
@@ -504,7 +630,7 @@
     "image": "64.jpg"
   },
   {
-    "altitude": 3455.4,
+    "altitude": 3455,
     "coordinates": [
       84.053903,
       28.649514
@@ -512,76 +638,20 @@
     "image": "65.jpg"
   },
   {
-    "altitude": 3457.5,
-    "coordinates": [
-      84.042747,
-      28.654536
-    ],
-    "image": "66.jpg"
-  },
-  {
-    "altitude": 3463,
-    "coordinates": [
-      84.041892,
-      28.655303
-    ],
-    "image": "67.jpg"
-  },
-  {
-    "altitude": 3471,
-    "coordinates": [
-      84.041047,
-      28.656667
-    ],
-    "image": "68.jpg"
-  },
-  {
-    "altitude": 3504,
-    "coordinates": [
-      84.022592,
-      28.6653
-    ],
-    "image": "69.jpg"
-  },
-  {
-    "altitude": 3554,
-    "coordinates": [
-      84.022178,
-      28.666844
-    ],
-    "image": "70.jpg"
-  },
-  {
-    "altitude": 3553,
-    "coordinates": [
-      84.021942,
-      28.667044
-    ],
-    "image": "71.jpg"
-  },
-  {
-    "altitude": 3573.6,
-    "coordinates": [
-      84.043419,
-      28.659692
-    ],
-    "image": "72.jpg"
-  },
-  {
-    "altitude": 3606,
-    "coordinates": [
-      84.045708,
-      28.658642
-    ],
-    "image": "73.jpg"
-  },
-  {
-    "altitude": 3846.1,
+    "altitude": 3846,
     "coordinates": [
       84.051881,
       28.658117
     ],
     "image": "74.jpg"
+  },
+  {
+    "altitude": 3847,
+    "coordinates": [
+      84.052117,
+      28.658444
+    ],
+    "image": "82.jpg"
   },
   {
     "altitude": 3880,
@@ -590,6 +660,14 @@
       28.660003
     ],
     "image": "75.jpg"
+  },
+  {
+    "altitude": 3988,
+    "coordinates": [
+      84.050628,
+      28.661269
+    ],
+    "image": "81.jpg"
   },
   {
     "altitude": 4227,
@@ -608,20 +686,210 @@
     "image": "77.jpg"
   },
   {
-    "altitude": 4620.9,
+    "altitude": 3606,
+    "coordinates": [
+      84.045708,
+      28.658642
+    ],
+    "image": "73.jpg"
+  },
+  {
+    "altitude": 3609,
+    "coordinates": [
+      84.044906,
+      28.659064
+    ],
+    "image": "83.jpg"
+  },
+  {
+    "altitude": 3574,
+    "coordinates": [
+      84.043419,
+      28.659692
+    ],
+    "image": "72.jpg"
+  },
+  {
+    "altitude": 3471,
+    "coordinates": [
+      84.041047,
+      28.656667
+    ],
+    "image": "68.jpg"
+  },
+  {
+    "altitude": 3463,
+    "coordinates": [
+      84.041892,
+      28.655303
+    ],
+    "image": "67.jpg"
+  },
+  {
+    "altitude": 3458,
+    "coordinates": [
+      84.042747,
+      28.654536
+    ],
+    "image": "66.jpg"
+  },
+  {
+    "altitude": 3457,
+    "coordinates": [
+      84.03687222222221,
+      28.658802777777776
+    ],
+    "image": "IMG_9223.JPG",
+    "dateTimeOriginal": "2019-11-24T12:34:30.000Z"
+  },
+  {
+    "altitude": 3550,
+    "coordinates": [
+      84.02297222222222,
+      28.666005555555554
+    ],
+    "image": "IMG_9032.jpg",
+    "dateTimeOriginal": "2019-11-22T13:50:46.000Z"
+  },
+  {
+    "altitude": 3545,
+    "coordinates": [
+      84.02304166666667,
+      28.66618611111111
+    ],
+    "image": "IMG_9033.JPG",
+    "dateTimeOriginal": "2019-11-22T13:50:50.000Z"
+  },
+  {
+    "altitude": 3544,
+    "coordinates": [
+      84.02248333333333,
+      28.666516666666666
+    ],
+    "image": "96_1.jpg",
+    "dateTimeOriginal": "2019-12-14T14:51:57.000Z"
+  },
+  {
+    "altitude": 3553,
+    "coordinates": [
+      84.02248333333333,
+      28.666516666666666
+    ],
+    "image": "IMG_9034.JPG",
+    "dateTimeOriginal": "2019-11-22T15:41:15.000Z"
+  },
+  {
+    "altitude": 3542,
+    "coordinates": [
+      84.0223,
+      28.666875
+    ],
+    "image": "IMG_9147.JPG",
+    "dateTimeOriginal": "2019-11-23T12:31:32.000Z"
+  },
+  {
+    "altitude": 3554,
+    "coordinates": [
+      84.022178,
+      28.666844
+    ],
+    "image": "70.jpg"
+  },
+  {
+    "altitude": 3553,
+    "coordinates": [
+      84.021942,
+      28.667044
+    ],
+    "image": "71.jpg"
+  },
+  {
+    "altitude": 3491,
+    "coordinates": [
+      84.02265277777778,
+      28.665352777777777
+    ],
+    "image": "IMG_9115.jpg",
+    "dateTimeOriginal": "2019-11-23T11:12:28.000Z"
+  },
+  {
+    "altitude": 3504,
+    "coordinates": [
+      84.022592,
+      28.6653
+    ],
+    "image": "69.jpg"
+  },
+  {
+    "altitude": 3508,
+    "coordinates": [
+      84.02259166666667,
+      28.6653
+    ],
+    "image": "IMG_9116.jpg",
+    "dateTimeOriginal": "2019-11-23T11:12:33.000Z"
+  },
+  {
+    "altitude": 3484,
+    "coordinates": [
+      84.02217777777777,
+      28.664580555555553
+    ],
+    "image": "IMG_9117.jpg",
+    "dateTimeOriginal": "2019-11-23T11:14:15.000Z"
+  },
+  {
+    "altitude": 3500,
+    "coordinates": [
+      84.02123333333333,
+      28.663869444444444
+    ],
+    "image": "IMG_9118.jpg",
+    "dateTimeOriginal": "2019-11-23T11:16:30.000Z"
+  },
+  {
+    "altitude": 3498,
+    "coordinates": [
+      84.01901944444444,
+      28.664094444444444
+    ],
+    "image": "IMG_9122.jpg",
+    "dateTimeOriginal": "2019-11-23T11:24:27.000Z"
+  },
+  {
+    "altitude": 3506,
+    "coordinates": [
+      84.01715833333333,
+      28.665074999999998
+    ],
+    "image": "IMG_9127.jpg",
+    "dateTimeOriginal": "2019-11-23T11:38:11.000Z"
+  },
+  {
+    "altitude": 3537,
+    "coordinates": [
+      84.0162111111111,
+      28.66616111111111
+    ],
+    "image": "IMG_9130.jpg",
+    "dateTimeOriginal": "2019-11-23T11:42:05.000Z"
+  },
+  {
+    "altitude": 3529,
+    "coordinates": [
+      84.01680833333333,
+      28.666630555555553
+    ],
+    "image": "IMG_9136.jpg",
+    "dateTimeOriginal": "2019-11-23T12:17:15.000Z"
+  },
+  {
+    "altitude": 4621,
     "coordinates": [
       84.059462,
       28.678561
     ],
     "image": "78.jpg"
-  },
-  {
-    "altitude": 4621,
-    "coordinates": [
-      84.059952,
-      28.678572
-    ],
-    "image": "79.jpg"
   },
   {
     "altitude": 4619,
@@ -632,31 +900,24 @@
     "image": "80.jpg"
   },
   {
-    "altitude": 3988,
+    "altitude": 4621,
     "coordinates": [
-      84.050628,
-      28.661269
+      84.059952,
+      28.678572
     ],
-    "image": "81.jpg"
+    "image": "79.jpg"
   },
   {
-    "altitude": 3847,
+    "altitude": 4104,
     "coordinates": [
-      84.052117,
-      28.658444
+      83.97089444444444,
+      28.728291666666664
     ],
-    "image": "82.jpg"
+    "image": "IMG_9358.JPG",
+    "dateTimeOriginal": "2019-11-25T09:55:40.000Z"
   },
   {
-    "altitude": 3609.2,
-    "coordinates": [
-      84.044906,
-      28.659064
-    ],
-    "image": "83.jpg"
-  },
-  {
-    "altitude": 4107.6,
+    "altitude": 4108,
     "coordinates": [
       83.970894,
       28.728292
@@ -680,7 +941,7 @@
     "image": "86.jpg"
   },
   {
-    "altitude": 4340.7,
+    "altitude": 4341,
     "coordinates": [
       83.969688,
       28.752093
@@ -696,7 +957,7 @@
     "image": "88.jpg"
   },
   {
-    "altitude": 4399.1,
+    "altitude": 4399,
     "coordinates": [
       83.967544,
       28.764342
@@ -704,7 +965,7 @@
     "image": "89.jpg"
   },
   {
-    "altitude": 4398.5,
+    "altitude": 4399,
     "coordinates": [
       83.968339,
       28.768653
@@ -720,7 +981,7 @@
     "image": "91.jpg"
   },
   {
-    "altitude": 4530.1,
+    "altitude": 4530,
     "coordinates": [
       83.972511,
       28.776839
@@ -728,7 +989,7 @@
     "image": "92.jpg"
   },
   {
-    "altitude": 5009.8,
+    "altitude": 5010,
     "coordinates": [
       83.961403,
       28.786392
@@ -747,6 +1008,15 @@
     "altitude": 5416,
     "coordinates": [
       83.938736,
+      28.793426
+    ],
+    "image": "95_2.jpg",
+    "dateTimeOriginal": "2019-11-26T12:51:57.000Z"
+  },
+  {
+    "altitude": 5416,
+    "coordinates": [
+      83.938736,
       28.793428
     ],
     "image": "95.jpg"
@@ -760,20 +1030,20 @@
     "image": "96.jpg"
   },
   {
+    "altitude": 3666,
+    "coordinates": [
+      83.860969,
+      28.814819
+    ],
+    "image": "98.jpg"
+  },
+  {
     "altitude": 3661,
     "coordinates": [
       83.860886,
       28.814889
     ],
     "image": "97.jpg"
-  },
-  {
-    "altitude": 3666.2,
-    "coordinates": [
-      83.860969,
-      28.814819
-    ],
-    "image": "98.jpg"
   },
   {
     "altitude": 3662,
@@ -792,7 +1062,7 @@
     "image": "100.jpg"
   },
   {
-    "altitude": 3581.7,
+    "altitude": 3582,
     "coordinates": [
       83.855186,
       28.816408
@@ -816,7 +1086,7 @@
     "image": "103.jpg"
   },
   {
-    "altitude": 3508.2,
+    "altitude": 3508,
     "coordinates": [
       83.848053,
       28.818164
@@ -832,7 +1102,7 @@
     "image": "105.jpg"
   },
   {
-    "altitude": 3439.2,
+    "altitude": 3439,
     "coordinates": [
       83.842492,
       28.817317
@@ -840,7 +1110,7 @@
     "image": "106.jpg"
   },
   {
-    "altitude": 3439.2,
+    "altitude": 3439,
     "coordinates": [
       83.830239,
       28.819986
@@ -856,7 +1126,7 @@
     "image": "108.jpg"
   },
   {
-    "altitude": 3353.8,
+    "altitude": 3354,
     "coordinates": [
       83.822753,
       28.821317
@@ -882,18 +1152,18 @@
   {
     "altitude": 3261,
     "coordinates": [
-      83.811311,
-      28.827233
-    ],
-    "image": "112.jpg"
-  },
-  {
-    "altitude": 3260.7,
-    "coordinates": [
       83.811927,
       28.827233
     ],
     "image": "113.jpg"
+  },
+  {
+    "altitude": 3261,
+    "coordinates": [
+      83.811311,
+      28.827233
+    ],
+    "image": "112.jpg"
   },
   {
     "altitude": 3019,
@@ -920,7 +1190,7 @@
     "image": "116.jpg"
   },
   {
-    "altitude": 2829.9,
+    "altitude": 2830,
     "coordinates": [
       83.776047,
       28.81945
@@ -952,14 +1222,6 @@
     "image": "120.jpg"
   },
   {
-    "altitude": 2743,
-    "coordinates": [
-      83.734275,
-      28.784936
-    ],
-    "image": "121.jpg"
-  },
-  {
     "altitude": 2748,
     "coordinates": [
       83.736336,
@@ -974,6 +1236,14 @@
       28.785028
     ],
     "image": "123.jpg"
+  },
+  {
+    "altitude": 2743,
+    "coordinates": [
+      83.734275,
+      28.784936
+    ],
+    "image": "121.jpg"
   },
   {
     "altitude": 2526,
@@ -998,5 +1268,86 @@
       28.498572
     ],
     "image": "126.jpg"
+  },
+  {
+    "altitude": 1417,
+    "coordinates": [
+      83.95129444444444,
+      28.24192777777778
+    ],
+    "image": "IMG_8222.JPG",
+    "dateTimeOriginal": "2019-09-08T09:11:32.000Z"
+  },
+  {
+    "altitude": 808,
+    "coordinates": [
+      83.943475,
+      28.22787222222222
+    ],
+    "image": "IMG_9690.JPG",
+    "dateTimeOriginal": "2019-12-24T07:35:54.000Z"
+  },
+  {
+    "altitude": 803,
+    "coordinates": [
+      83.95768611111112,
+      28.220019444444443
+    ],
+    "image": "IMG_8332.JPG",
+    "dateTimeOriginal": "2019-09-22T09:03:48.000Z"
+  },
+  {
+    "altitude": 795,
+    "coordinates": [
+      83.95754166666667,
+      28.218405555555552
+    ],
+    "image": "IMG_8286.JPG",
+    "dateTimeOriginal": "2019-09-12T14:43:24.000Z"
+  },
+  {
+    "altitude": 801,
+    "coordinates": [
+      83.95705277777778,
+      28.21343611111111
+    ],
+    "image": "IMG_9641.jpg",
+    "dateTimeOriginal": "2019-12-14T14:51:57.000Z"
+  },
+  {
+    "altitude": 812,
+    "coordinates": [
+      83.959525,
+      28.21076111111111
+    ],
+    "image": "IMG_9722.JPG",
+    "dateTimeOriginal": "2019-12-25T12:37:00.000Z"
+  },
+  {
+    "altitude": 528,
+    "coordinates": [
+      84.19274166666668,
+      27.9845
+    ],
+    "image": "IMG_7777.JPG",
+    "dateTimeOriginal": "2019-08-23T04:09:46.000Z"
+  },
+  {
+    "altitude": 1373,
+    "coordinates": [
+      85.19898888888889,
+      27.71334722222222
+    ],
+    "image": "IMG_8105.jpg",
+    "dateTimeOriginal": "2019-09-03T14:57:32.000Z"
+  },
+  {
+    "altitude": 1315,
+    "coordinates": [
+      85.311225,
+      27.709966666666666
+    ],
+    "image": "IMG_8075.JPG",
+    "dateTimeOriginal": "2019-09-02T15:50:48.000Z"
   }
 ]

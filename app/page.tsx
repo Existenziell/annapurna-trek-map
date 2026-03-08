@@ -146,7 +146,7 @@ export default function MapPage() {
   useEffect(() => {
     if (!isReady || !mapRef.current) return
     mapRef.current.resize()
-  }, [isReady, panelWidth])
+  }, [isReady, panelWidth, mapRef])
 
   // Clamp panel to at most 50% when container shrinks (e.g. window resize)
   useEffect(() => {

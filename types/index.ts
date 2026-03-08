@@ -17,7 +17,7 @@ export interface TrekMarker {
   altitude: number
   coordinates: [number, number]
   image?: string
-  exif?: MarkerExif
+  dateTimeOriginal?: string
 }
 
 /** Properties on a trek marker (GeoJSON feature) */
