@@ -38,6 +38,15 @@ export const MARKER_ZOOM = 14.5
 /** localStorage key for persisted map settings */
 export const SETTINGS_STORAGE_KEY = 'annapurna-trek-map-settings'
 
+/** localStorage key for right panel width (px) */
+export const PANEL_WIDTH_STORAGE_KEY = 'annapurna-trek-map-panel-width'
+
+/** Default right panel width (px) */
+export const DEFAULT_PANEL_WIDTH = 380
+
+/** Min right panel width (px). Max is 50% of container (50/50 split). */
+export const PANEL_WIDTH_MIN = 280
+
 /** Version of stored settings schema (for migrations) */
 export const SETTINGS_STORAGE_VERSION = 1
 

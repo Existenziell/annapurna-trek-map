@@ -16,7 +16,7 @@ export default function RightPanel({
   const [activeTab, setActiveTab] = useState<RightPanelTabId>('content')
 
   return (
-    <aside className="flex min-w-0 flex-[2] flex-col border-l border-level-3 bg-level-1 md:min-w-[280px] overflow-hidden">
+    <aside className="flex min-h-0 min-w-0 flex-1 flex-col border-l border-level-3 bg-level-1 overflow-hidden">
       <div className="flex border-b border-level-3">
         <button
           type="button"
@@ -39,21 +39,23 @@ export default function RightPanel({
           Settings
         </button>
       </div>
-      <div className="flex flex-1 flex-col justify-center overflow-y-auto p-4 min-h-0">
-        {activeTab === 'content' && (
-          <ContentTab
-            selectedMarker={selectedMarker}
-            onPrev={onPrev}
-            onNext={onNext}
-            onStartTrek={onStartTrek}
-          />
-        )}
-        {activeTab === 'settings' && (
-          <SettingsTab
-            settings={settings}
-            onChange={onSettingsChange}
-          />
-        )}
+      <div className="flex flex-1 flex-col justify-start overflow-y-auto p-4 min-h-0 mt-6">
+        <div className="min-h-full flex flex-col">
+          {activeTab === 'content' && (
+            <ContentTab
+              selectedMarker={selectedMarker}
+              onPrev={onPrev}
+              onNext={onNext}
+              onStartTrek={onStartTrek}
+            />
+          )}
+          {activeTab === 'settings' && (
+            <SettingsTab
+              settings={settings}
+              onChange={onSettingsChange}
+            />
+          )}
+        </div>
       </div>
     </aside>
   )

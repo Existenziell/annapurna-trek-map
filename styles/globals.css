@@ -123,3 +123,13 @@ html, body {
 .suggestions-wrapper {
   @apply text-left;
 }
+
+/* Resizable right panel: full width on mobile, draggable width on desktop */
+.panel-width-wrapper {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .panel-width-wrapper {
+    width: var(--panel-width-px, 380px);
+  }
+}

@@ -18,7 +18,7 @@ export default function MarkerDetail({
   const alt = `Trek stop ${marker.id}`
 
   return (
-    <div className="flex flex-col min-h-[50vh] gap-4">
+    <div className="flex flex-1 flex-col min-h-[50vh] gap-4">
       <div className="flex flex-1 min-h-0 items-center justify-center">
         <button
           type="button"
