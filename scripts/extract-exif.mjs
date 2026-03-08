@@ -62,12 +62,9 @@ async function extractExif(imagePath) {
   }
 }
 
-/** Order markers by dateTime ascending; video-only (no image) at the end. */
+/** Order all markers by dateTime ascending; markers without dateTime last. */
 function orderMarkersByDateTime(markers) {
-  const isVideoOnly = (m) => Boolean(m.video && !m.image)
-  const withImage = markers.filter((m) => !isVideoOnly(m))
-  const videoOnly = markers.filter(isVideoOnly)
-  withImage.sort((a, b) => {
+  return [...markers].sort((a, b) => {
     const da = a.dateTime ?? ''
     const db = b.dateTime ?? ''
     if (!da && !db) return 0
@@ -75,7 +72,6 @@ function orderMarkersByDateTime(markers) {
     if (!db) return -1
     return da.localeCompare(db)
   })
-  return [...withImage, ...videoOnly]
 }
 
 async function main() {

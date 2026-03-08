@@ -1,15 +1,9 @@
 import type { TrekMarker, TrekMarkerCollection, TrekMarkerType } from '@/types'
 import markersJson from './markers.json'
 
-function isVideoOnly(m: TrekMarker): boolean {
-  return Boolean(m.video && !m.image)
-}
-
-/** Order markers by dateTime ascending; video-only (no image) at the end. */
+/** Order all markers by dateTime ascending; markers without dateTime last. */
 function orderMarkersByDateTime(markers: TrekMarker[]): TrekMarker[] {
-  const withImage = markers.filter((m) => !isVideoOnly(m))
-  const videoOnly = markers.filter(isVideoOnly)
-  withImage.sort((a, b) => {
+  return [...markers].sort((a, b) => {
     const da = a.dateTime ?? ''
     const db = b.dateTime ?? ''
     if (!da && !db) return 0
@@ -17,7 +11,6 @@ function orderMarkersByDateTime(markers: TrekMarker[]): TrekMarker[] {
     if (!db) return -1
     return da.localeCompare(db)
   })
-  return [...withImage, ...videoOnly]
 }
 
 const rawMarkers = markersJson as TrekMarker[]
