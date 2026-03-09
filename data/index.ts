@@ -31,6 +31,7 @@ export const data: TrekMarkerCollection = {
         ...(marker.video && { video: marker.video }),
         ...(marker.dateTime && { dateTime: marker.dateTime }),
         ...(marker.desc !== undefined && { desc: marker.desc }),
+        ...(marker.external !== undefined && { external: marker.external }),
       },
       geometry: {
         type: 'Point',

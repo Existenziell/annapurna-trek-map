@@ -20,6 +20,8 @@ export interface TrekMarker {
   video?: string
   dateTime?: string
   desc?: string
+  /** If true, video is an external embed (e.g. Vimeo ID or URL). Default false. */
+  external?: boolean
 }
 
 /** Properties on a trek marker (GeoJSON feature) */
@@ -33,6 +35,8 @@ export interface TrekMarkerProperties {
   dateTime?: string
   desc?: string
   exif?: MarkerExif
+  /** If true, video is an external embed (e.g. Vimeo). Default false. */
+  external?: boolean
 }
 
 /** Trek point marker (GeoJSON Feature with our properties) */

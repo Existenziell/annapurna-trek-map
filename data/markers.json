@@ -108,13 +108,15 @@
     ]
   },
   {
-    "video": "video/goats.mp4",
+    "video": "1171911419",
     "dateTime": "2019-11-15T11:17:48.000Z",
+    "external": true,
     "altitude": 916,
     "coordinates": [
       84.374079,
       28.456175
-    ]
+    ],
+    "desc": "Goats"
   },
   {
     "image": "IMG_8889.JPG",
@@ -279,13 +281,15 @@
     ]
   },
   {
-    "image": "24.jpg",
-    "dateTime": "2019-11-18T14:54:35.000Z",
-    "altitude": 2465,
+    "video": "1171945718",
+    "dateTime": "2019-11-18T13:02:10.000Z",
+    "external": true,
+    "altitude": 2428,
     "coordinates": [
-      84.317725,
-      28.526067
-    ]
+      84.3174,
+      28.5282
+    ],
+    "desc": "Stairs"
   },
   {
     "image": "25.jpg",
@@ -375,15 +379,6 @@
     "coordinates": [
       84.171769,
       28.604947
-    ]
-  },
-  {
-    "video": "video/bridge.mp4",
-    "dateTime": "2019-11-20T09:37:51.000Z",
-    "altitude": 3176,
-    "coordinates": [
-      84.16682926119614,
-      28.60769922032162
     ]
   },
   {
@@ -612,22 +607,26 @@
     ]
   },
   {
-    "image": "chris.jpg",
-    "dateTime": "2019-11-22T10:28:57.000Z",
+    "video": "1171945701",
+    "dateTime": "2019-11-22T10:32:17.000Z",
+    "external": true,
     "altitude": 3700,
     "coordinates": [
       84.0952587,
       28.656845999999998
-    ]
+    ],
+    "desc": "Shrine Panorama"
   },
   {
-    "video": "video/shrine.mp4",
+    "video": "1171895754",
     "dateTime": "2019-11-22T10:32:17.000Z",
+    "external": true,
     "altitude": 3751,
     "coordinates": [
       84.0951478103961,
       28.656821273370355
-    ]
+    ],
+    "desc": "Shrine"
   },
   {
     "image": "56.jpg",
@@ -675,8 +674,19 @@
     ]
   },
   {
+    "video": "1171890800",
+    "dateTime": "2019-11-22T16:12:58.000Z",
+    "external": true,
+    "altitude": 3176,
+    "coordinates": [
+      84.08599461603893,
+      28.66082209879916
+    ],
+    "desc": "Bridge"
+  },
+  {
     "image": "60.jpg",
-    "dateTime": "2019-11-22T16:00:04.000Z",
+    "dateTime": "2019-11-22T16:30:04.000Z",
     "altitude": 3482,
     "coordinates": [
       84.082489,
@@ -691,6 +701,17 @@
       84.078056,
       28.649717
     ]
+  },
+  {
+    "video": "1171903257",
+    "dateTime": "2019-11-22T17:10:08.000Z",
+    "external": true,
+    "altitude": 3427,
+    "coordinates": [
+      84.0796,
+      28.6498
+    ],
+    "desc": "Roundtrip"
   },
   {
     "image": "62.jpg",
@@ -711,13 +732,15 @@
     ]
   },
   {
-    "video": "video/01.mp4",
+    "video": "1171919620",
     "dateTime": "2019-11-22T18:12:48.000Z",
+    "external": true,
     "altitude": 3435,
     "coordinates": [
       84.05487792658954,
       28.64641780274735
-    ]
+    ],
+    "desc": "Suspension bridge"
   },
   {
     "image": "64.jpg",
@@ -846,13 +869,15 @@
     ]
   },
   {
-    "video": "video/heli.mp4",
+    "video": "1171942400",
     "dateTime": "2019-11-23T11:45:48.000Z",
+    "external": true,
     "altitude": 3891,
     "coordinates": [
       84.0511,
       28.6605
-    ]
+    ],
+    "desc": "Helicopter"
   },
   {
     "image": "81.jpg",
@@ -873,6 +898,17 @@
     ]
   },
   {
+    "video": "1171917127",
+    "dateTime": "2019-11-23T13:29:48.000Z",
+    "external": true,
+    "altitude": 4117,
+    "coordinates": [
+      84.0553,
+      28.6677
+    ],
+    "desc": "Walkby"
+  },
+  {
     "image": "77.jpg",
     "dateTime": "2019-11-23T13:29:59.000Z",
     "altitude": 4238,
@@ -882,13 +918,26 @@
     ]
   },
   {
-    "video": "video/eagle.mp4",
+    "video": "1171910607",
     "dateTime": "2019-11-23T13:30:48.000Z",
+    "external": true,
     "altitude": 4117,
     "coordinates": [
       84.05617351730632,
       28.668694812430047
-    ]
+    ],
+    "desc": "Eagle"
+  },
+  {
+    "video": "1171927673",
+    "dateTime": "2019-11-23T13:31:17.000Z",
+    "external": true,
+    "altitude": 4528,
+    "coordinates": [
+      84.0539,
+      28.6737
+    ],
+    "desc": "Run to ice lake"
   },
   {
     "image": "78.jpg",
@@ -918,40 +967,70 @@
     ]
   },
   {
-    "video": "video/02.mp4",
+    "video": "1171927561",
+    "dateTime": "2019-11-23T13:37:53.000Z",
+    "external": true,
+    "altitude": 4603,
+    "coordinates": [
+      84.0595,
+      28.6786
+    ],
+    "desc": "Ice lake"
+  },
+  {
+    "video": "1171927487",
     "dateTime": "2019-11-23T13:56:48.000Z",
+    "external": true,
     "altitude": 4528,
     "coordinates": [
       84.05649525043651,
       28.676344993301882
-    ]
+    ],
+    "desc": "Downhill"
   },
   {
-    "video": "video/04.mp4",
+    "video": "1171914709",
+    "dateTime": "2019-11-23T14:56:48.000Z",
+    "external": true,
+    "altitude": 4278,
+    "coordinates": [
+      84.0539,
+      28.6737
+    ],
+    "desc": "Cam fall"
+  },
+  {
+    "video": "1171918688",
     "dateTime": "2019-11-23T14:57:48.000Z",
+    "external": true,
     "altitude": 4278,
     "coordinates": [
       84.05393436239461,
       28.673692761008695
-    ]
+    ],
+    "desc": "Passby"
   },
   {
-    "video": "video/m1.mp4",
+    "video": "1171927526",
     "dateTime": "2019-11-23T15:59:48.000Z",
+    "external": true,
     "altitude": 4274,
     "coordinates": [
       84.04407405396825,
       28.664051160731788
-    ]
+    ],
+    "desc": "Prayer flags"
   },
   {
-    "video": "video/m2.mp4",
+    "video": "1171945670",
     "dateTime": "2019-11-23T16:36:48.000Z",
+    "external": true,
     "altitude": 4171,
     "coordinates": [
       84.04086720179328,
       28.667277290466927
-    ]
+    ],
+    "desc": "Panorama"
   },
   {
     "image": "IMG_9147.JPG",
@@ -1045,12 +1124,34 @@
   },
   {
     "image": "IMG_9130.jpg",
-    "dateTime": "2019-11-24T18:39:05.000Z",
+    "dateTime": "2019-11-24T14:39:05.000Z",
     "altitude": 3537,
     "coordinates": [
       84.0162111111111,
       28.66616111111111
     ]
+  },
+  {
+    "video": "1171945383",
+    "dateTime": "2019-11-24T15:41:05.000Z",
+    "external": true,
+    "altitude": 3563,
+    "coordinates": [
+      84.0158,
+      28.6653
+    ],
+    "desc": "Gangapurna"
+  },
+  {
+    "video": "1171890714",
+    "dateTime": "2019-11-24T16:41:05.000Z",
+    "external": true,
+    "altitude": 3587,
+    "coordinates": [
+      84.0155,
+      28.6647
+    ],
+    "desc": "Manang"
   },
   {
     "image": "IMG_9034.JPG",
@@ -1152,6 +1253,17 @@
     ]
   },
   {
+    "video": "1171923759",
+    "dateTime": "2019-11-25T18:45:50.000Z",
+    "external": true,
+    "altitude": 4700,
+    "coordinates": [
+      83.97228239615464,
+      28.777823273260367
+    ],
+    "desc": "Base camp"
+  },
+  {
     "image": "93.jpg",
     "dateTime": "2019-11-26T04:00:26.000Z",
     "altitude": 5010,
@@ -1180,12 +1292,23 @@
   },
   {
     "image": "95.jpg",
-    "dateTime": "2019-11-26T12:24:57.000Z",
+    "dateTime": "2019-11-26T11:34:57.000Z",
     "altitude": 5416,
     "coordinates": [
       83.938736,
       28.793428
     ]
+  },
+  {
+    "video": "1171945451",
+    "dateTime": "2019-11-26T12:55:57.000Z",
+    "external": true,
+    "altitude": 3816,
+    "coordinates": [
+      83.86835192275515,
+      28.818322927467932
+    ],
+    "desc": "Muktinath"
   },
   {
     "image": "98.jpg",
@@ -1242,13 +1365,15 @@
     ]
   },
   {
-    "video": "video/05.mp4",
+    "video": "1171945536",
     "dateTime": "2019-11-26T14:53:48.000Z",
+    "external": true,
     "altitude": 3561,
     "coordinates": [
       83.85232921836479,
       28.81713929085808
-    ]
+    ],
+    "desc": "Mustang Panorama"
   },
   {
     "image": "103.jpg",
@@ -1270,7 +1395,7 @@
   },
   {
     "image": "105.jpg",
-    "dateTime": "2019-11-27T15:35:03.000Z",
+    "dateTime": "2019-11-27T10:35:03.000Z",
     "altitude": 3443,
     "coordinates": [
       83.84285,
@@ -1279,7 +1404,7 @@
   },
   {
     "image": "106.jpg",
-    "dateTime": "2019-11-27T16:05:03.000Z",
+    "dateTime": "2019-11-27T11:05:03.000Z",
     "altitude": 3439,
     "coordinates": [
       83.842492,
@@ -1288,7 +1413,7 @@
   },
   {
     "image": "107.jpg",
-    "dateTime": "2019-11-27T16:35:03.000Z",
+    "dateTime": "2019-11-27T11:35:03.000Z",
     "altitude": 3439,
     "coordinates": [
       83.830239,
@@ -1297,7 +1422,7 @@
   },
   {
     "image": "108.jpg",
-    "dateTime": "2019-11-27T16:45:04.000Z",
+    "dateTime": "2019-11-27T11:45:04.000Z",
     "altitude": 3351,
     "coordinates": [
       83.824617,
@@ -1306,7 +1431,7 @@
   },
   {
     "image": "109.jpg",
-    "dateTime": "2019-11-27T16:55:04.000Z",
+    "dateTime": "2019-11-27T11:55:04.000Z",
     "altitude": 3354,
     "coordinates": [
       83.822753,
@@ -1315,7 +1440,7 @@
   },
   {
     "image": "110.jpg",
-    "dateTime": "2019-11-27T17:05:04.000Z",
+    "dateTime": "2019-11-27T12:05:04.000Z",
     "altitude": 3343,
     "coordinates": [
       83.821083,
@@ -1324,7 +1449,7 @@
   },
   {
     "image": "111.jpg",
-    "dateTime": "2019-11-27T17:15:04.000Z",
+    "dateTime": "2019-11-27T12:15:04.000Z",
     "altitude": 3341,
     "coordinates": [
       83.819197,
@@ -1333,7 +1458,7 @@
   },
   {
     "image": "112.jpg",
-    "dateTime": "2019-11-27T17:25:05.000Z",
+    "dateTime": "2019-11-27T12:25:05.000Z",
     "altitude": 3261,
     "coordinates": [
       83.811311,
@@ -1341,9 +1466,20 @@
     ]
   },
   {
+    "video": "1171945570",
+    "dateTime": "2019-11-27T12:45:05.000Z",
+    "external": true,
+    "altitude": 3204,
+    "coordinates": [
+      83.7952,
+      28.829
+    ],
+    "desc": "Offroad"
+  },
+  {
     "image": "113.jpg",
-    "dateTime": "2019-11-27T17:30:05.000Z",
-    "altitude": 3261,
+    "dateTime": "2019-11-27T13:30:05.000Z",
+    "altitude": 3617,
     "coordinates": [
       83.811927,
       28.827233
@@ -1351,7 +1487,7 @@
   },
   {
     "image": "114.jpg",
-    "dateTime": "2019-11-27T17:35:06.000Z",
+    "dateTime": "2019-11-27T14:35:06.000Z",
     "altitude": 3019,
     "coordinates": [
       83.785058,
@@ -1360,7 +1496,7 @@
   },
   {
     "image": "115.jpg",
-    "dateTime": "2019-11-27T17:45:06.000Z",
+    "dateTime": "2019-11-27T15:45:06.000Z",
     "altitude": 2985,
     "coordinates": [
       83.783653,
@@ -1369,7 +1505,7 @@
   },
   {
     "image": "116.jpg",
-    "dateTime": "2019-11-27T17:55:06.000Z",
+    "dateTime": "2019-11-27T16:12:06.000Z",
     "altitude": 3001,
     "coordinates": [
       83.782439,
@@ -1377,8 +1513,19 @@
     ]
   },
   {
+    "video": "1171945407",
+    "dateTime": "2019-11-27T16:34:06.000Z",
+    "external": true,
+    "altitude": 2995,
+    "coordinates": [
+      83.7819,
+      28.8241
+    ],
+    "desc": "Jomsom"
+  },
+  {
     "image": "117.jpg",
-    "dateTime": "2019-11-27T18:05:07.000Z",
+    "dateTime": "2019-11-27T17:05:07.000Z",
     "altitude": 2830,
     "coordinates": [
       83.776047,
@@ -1387,7 +1534,7 @@
   },
   {
     "image": "118.jpg",
-    "dateTime": "2019-11-27T18:15:07.000Z",
+    "dateTime": "2019-11-27T17:15:07.000Z",
     "altitude": 2850,
     "coordinates": [
       83.771667,
@@ -1396,7 +1543,7 @@
   },
   {
     "image": "119.jpg",
-    "dateTime": "2019-11-27T18:35:07.000Z",
+    "dateTime": "2019-11-27T17:35:07.000Z",
     "altitude": 2804,
     "coordinates": [
       83.76905,
@@ -1404,8 +1551,19 @@
     ]
   },
   {
+    "video": "1171945339",
+    "dateTime": "2019-11-27T17:55:07.000Z",
+    "external": true,
+    "altitude": 0,
+    "coordinates": [
+      83.7643,
+      28.8012
+    ],
+    "desc": "Canyon"
+  },
+  {
     "image": "120.jpg",
-    "dateTime": "2019-11-27T18:45:09.000Z",
+    "dateTime": "2019-11-27T18:05:09.000Z",
     "altitude": 2760,
     "coordinates": [
       83.748328,
@@ -1414,7 +1572,7 @@
   },
   {
     "image": "122.jpg",
-    "dateTime": "2019-11-27T18:55:10.000Z",
+    "dateTime": "2019-11-27T18:15:10.000Z",
     "altitude": 2748,
     "coordinates": [
       83.736336,
@@ -1423,7 +1581,7 @@
   },
   {
     "image": "123.jpg",
-    "dateTime": "2019-11-27T19:15:10.000Z",
+    "dateTime": "2019-11-27T18:25:10.000Z",
     "altitude": 2743,
     "coordinates": [
       83.7372020847983,
@@ -1432,7 +1590,7 @@
   },
   {
     "image": "121.jpg",
-    "dateTime": "2019-11-27T19:25:10.000Z",
+    "dateTime": "2019-11-27T18:38:10.000Z",
     "altitude": 2743,
     "coordinates": [
       83.734275,

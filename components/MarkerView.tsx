@@ -15,11 +15,15 @@ export default function MarkerView({
 }: MarkerViewProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [lastLoadedFullscreenSrc, setLastLoadedFullscreenSrc] = useState<string | null>(null)
-  const { altitude, image, video, dateTime, desc } = marker.properties
+  const { altitude, image, video, dateTime, desc, external = false } = marker.properties
   const imageSrc = image ? `/trek/${image}` : null
-  const videoSrc = video ? `/trek/${video}` : null
-  const hasMedia = videoSrc ?? imageSrc
+  const videoSrc = !external && video ? `/trek/${video}` : null
+  const vimeoId = external && video ? (/\d{7,}/.exec(String(video))?.[0] ?? null) : null
+  const hasMedia = vimeoId ? true : (videoSrc ?? imageSrc)
   const alt = `Trek stop ${marker.id}`
+  const vimeoEmbedUrl = vimeoId
+    ? `https://player.vimeo.com/video/${vimeoId}?badge=0&autopause=0&title=0&byline=0`
+    : null
 
   const fullscreenImageLoaded = imageSrc !== null && lastLoadedFullscreenSrc === imageSrc
 
@@ -51,10 +55,18 @@ export default function MarkerView({
         <button
           type="button"
           onClick={() => hasMedia && setIsFullscreen(true)}
-          className="relative w-full aspect-[4/3] max-h-[50vh] rounded shadow-lg overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:cursor-default disabled:opacity-80"
+          className={`relative w-full aspect-[4/3] max-h-[50vh] rounded overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:cursor-default disabled:opacity-80 ${vimeoEmbedUrl ? '' : 'shadow-lg'}`}
           disabled={!hasMedia}
         >
-          {videoSrc ? (
+          {vimeoEmbedUrl ? (
+            <iframe
+              src={vimeoEmbedUrl}
+              title={alt}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          ) : videoSrc ? (
             <video
               src={videoSrc}
               controls
@@ -87,7 +99,7 @@ export default function MarkerView({
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={videoSrc ? 'Fullscreen video' : 'Fullscreen image'}
+          aria-label={vimeoEmbedUrl || videoSrc ? 'Fullscreen video' : 'Fullscreen image'}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md cursor-zoom-out"
           onClick={() => setIsFullscreen(false)}
         >
@@ -95,7 +107,17 @@ export default function MarkerView({
             className="relative flex items-center justify-center max-h-[90vh] max-w-[95vw] cursor-default min-h-[200px] min-w-[200px]"
             onClick={(e) => e.stopPropagation()}
           >
-            {videoSrc ? (
+            {vimeoEmbedUrl ? (
+              <div className="relative w-full max-w-[90vw]" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  src={vimeoEmbedUrl}
+                  title={alt}
+                  className="absolute inset-0 w-full h-full rounded"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+            ) : videoSrc ? (
               <video
                 src={videoSrc}
                 controls
@@ -138,7 +160,7 @@ export default function MarkerView({
                 onPrev()
               }}
               className="fixed left-4 top-1/2 -translate-y-1/2 z-[51] flex items-center justify-center w-14 h-14 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors cursor-pointer"
-              aria-label={videoSrc ? 'Previous video' : 'Previous image'}
+              aria-label={vimeoEmbedUrl || videoSrc ? 'Previous video' : 'Previous image'}
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
@@ -151,7 +173,7 @@ export default function MarkerView({
                 onNext()
               }}
               className="fixed right-4 top-1/2 -translate-y-1/2 z-[51] flex items-center justify-center w-14 h-14 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors cursor-pointer"
-              aria-label={videoSrc ? 'Next video' : 'Next image'}
+              aria-label={vimeoEmbedUrl || videoSrc ? 'Next video' : 'Next image'}
             >
               <ChevronRight className="w-8 h-8" />
             </button>
