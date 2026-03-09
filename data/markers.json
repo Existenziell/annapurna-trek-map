@@ -108,8 +108,17 @@
     ]
   },
   {
+    "video": "video/sheep.mp4",
+    "dateTime": "2019-11-15T11:17:48.000Z",
+    "altitude": 916,
+    "coordinates": [
+      84.374079,
+      28.456175
+    ]
+  },
+  {
     "image": "IMG_8889.JPG",
-    "dateTime": "2019-11-15T11:27:14.000Z",
+    "dateTime": "2019-11-15T12:27:14.000Z",
     "altitude": 1563,
     "coordinates": [
       84.37280277777776,
@@ -118,20 +127,11 @@
   },
   {
     "image": "12.jpg",
-    "dateTime": "2019-11-15T12:04:13.000Z",
+    "dateTime": "2019-11-15T12:34:13.000Z",
     "altitude": 1661,
     "coordinates": [
       84.372156,
       28.460669
-    ]
-  },
-  {
-    "video": "video/sheep.mp4",
-    "dateTime": "2019-11-15T12:17:48.000Z",
-    "altitude": 916,
-    "coordinates": [
-      84.374079,
-      28.456175
     ]
   },
   {
