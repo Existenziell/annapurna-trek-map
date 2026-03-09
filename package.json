@@ -6,10 +6,12 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "NODE_OPTIONS='--no-webstorage' vitest run",
-    "test:watch": "NODE_OPTIONS='--no-webstorage' vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "all": "concurrently \"npm run lint\" \"npm run test\" \"npm run build\"",
-    "extract-exif": "node scripts/extract-exif.mjs"
+    "extract-exif": "node scripts/extract-exif.mjs",
+    "extract-video-metadata": "node scripts/extract-video-metadata.mjs",
+    "normalize-slowmo": "bash scripts/normalize-slowmo.sh"
   },
   "dependencies": {
     "mapbox-gl": "^3.19.1",
