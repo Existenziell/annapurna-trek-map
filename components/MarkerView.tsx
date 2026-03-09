@@ -162,7 +162,7 @@ export default function MarkerView({
         <p>Altitude: {altitude}m</p>
         {dateTime && (
           <p>
-            Date: {new Date(dateTime).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
+            Date: {new Date(dateTime).toLocaleDateString(undefined, { dateStyle: 'medium' })}
           </p>
         )}
       </div>
