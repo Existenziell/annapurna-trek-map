@@ -7,6 +7,7 @@ import {
   DEFAULT_MAP_PITCH,
   DEFAULT_MAP_STYLE,
   DEFAULT_MAP_ZOOM,
+  MAP_PROJECTION,
 } from '@/lib/constants'
 
 const DEFAULT_OPTIONS: MapboxMapOptions = {
@@ -14,6 +15,7 @@ const DEFAULT_OPTIONS: MapboxMapOptions = {
   zoom: DEFAULT_MAP_ZOOM,
   pitch: DEFAULT_MAP_PITCH,
   style: DEFAULT_MAP_STYLE,
+  projection: MAP_PROJECTION,
 }
 
 export function useMapboxMap(
@@ -43,10 +45,13 @@ export function useMapboxMap(
         center: opts.center ?? DEFAULT_OPTIONS.center,
         zoom: opts.zoom ?? DEFAULT_OPTIONS.zoom,
         pitch: opts.pitch ?? DEFAULT_OPTIONS.pitch,
+        projection: opts.projection ?? DEFAULT_OPTIONS.projection,
       }) as MapboxMap
       mapRef.current = map
       map.once('load', () => setIsReady(true))
-    }).catch((err) => setError(err instanceof Error ? err : new Error(String(err))))
+    }).catch((err) => {
+      setError(err instanceof Error ? err : new Error(String(err)))
+    })
 
     return () => {
       if (mapRef.current) {

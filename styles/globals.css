@@ -51,9 +51,15 @@ html, body {
 }
 
 .button {
-  @apply bg-level-5 hover:text-accent text-level-1 py-2 px-4 rounded shadow-lg transition-all cursor-pointer
-    hover:shadow-sm dark:bg-accent dark:text-level-5
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-level-5;
+  @apply py-2 px-4 rounded shadow-lg transition-all cursor-pointer border border-level-3;
+  @apply bg-level-5 text-level-2 hover:bg-level-4 hover:text-accent hover:text-white hover:shadow-none;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent;
+}
+
+.button-nav {
+  @apply py-2 px-8 text-base font-medium inline-flex items-center justify-center gap-1 rounded shadow-lg transition-all cursor-pointer border border-level-3;
+  @apply bg-level-2 text-level-5 hover:bg-level-3 hover:text-accent dark:hover:text-white;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
 }
 
 .link {
@@ -70,6 +76,71 @@ html, body {
 
 .card {
   @apply rounded-lg border border-level-3 bg-level-2 p-4 shadow-sm;
+}
+
+/* Shared focus ring for buttons/controls */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+}
+
+.focus-ring-offset-level-1 {
+  @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-level-1;
+}
+
+/* Vertical resize handle (e.g. image panel) */
+.resize-handle-vertical {
+  @apply hidden md:block absolute left-0 top-0 bottom-0 w-3 cursor-col-resize bg-level-3 hover:bg-accent rounded-l-2xl z-10;
+}
+
+/* Color picker inputs */
+.input-color {
+  @apply h-10 w-14 rounded border border-level-3 cursor-pointer;
+}
+
+.input-color-full {
+  @apply h-10 w-full rounded border border-level-3 cursor-pointer;
+}
+
+/* Settings panel drawer */
+.settings-panel-drawer {
+  @apply w-[320px] max-w-full h-full overflow-y-auto bg-level-1 border-l border-level-3 shadow-xl p-4 shrink-0;
+}
+
+/* Media container (image/video card) */
+.media-frame {
+  @apply relative rounded-2xl border-2 border-level-3 shadow-lg overflow-hidden bg-level-1;
+}
+
+/* Icon button (e.g. settings gear) */
+.btn-icon-secondary {
+  @apply p-2 bg-level-2 border border-level-3 rounded shadow-sm text-level-5 hover:bg-level-3 hover:text-level-6 shrink-0 focus-ring;
+}
+
+/* Fullscreen overlay and close button */
+.overlay-fullscreen {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md cursor-zoom-out p-2;
+}
+
+.btn-close-overlay {
+  @apply absolute top-3 right-3 z-[60] flex items-center justify-center w-14 h-14 rounded-full bg-black/40 text-white hover:bg-black/60 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent;
+}
+
+/* Section heading with top border (settings) */
+.section-heading {
+  @apply font-medium mt-0 text-base border-t border-level-3 pt-4;
+}
+
+/* Marker info overlay badge (date + altitude) */
+.marker-info-badge {
+  @apply text-xs bg-level-2 text-level-5 py-1.5 px-2 shrink-0 pointer-events-none;
+}
+
+.marker-info-badge--inline {
+  @apply rounded-bl rounded-tr text-right;
+}
+
+.marker-info-badge--fullscreen {
+  @apply absolute bottom-2 left-1/2 -translate-x-1/2 z-10 rounded whitespace-nowrap text-center;
 }
 
 /* ==========================================================================
@@ -124,12 +195,4 @@ html, body {
   @apply text-left;
 }
 
-/* Resizable right panel: full width on mobile, draggable width on desktop */
-.panel-width-wrapper {
-  width: 100%;
-}
-@media (min-width: 768px) {
-  .panel-width-wrapper {
-    width: var(--panel-width-px, 380px);
-  }
-}
+/* Floating content panel width is set inline (--panel-width-px) and Tailwind md:w-[var(--panel-width-px)]; mobile uses w-full. */

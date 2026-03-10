@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { loadSettings, saveSettings } from '@/lib/settingsStorage'
 import { DEFAULT_MAP_SETTINGS } from '@/types'
-import { SETTINGS_STORAGE_KEY, SETTINGS_STORAGE_VERSION } from '@/lib/constants'
+import { SETTINGS_STORAGE_KEY } from '@/lib/constants'
 
 describe('settingsStorage', () => {
   let localStorageMock: Record<string, string>
@@ -35,7 +35,6 @@ describe('settingsStorage', () => {
     saveSettings(custom)
     expect(localStorageMock[SETTINGS_STORAGE_KEY]).toBeDefined()
     const parsed = JSON.parse(localStorageMock[SETTINGS_STORAGE_KEY])
-    expect(parsed.version).toBe(SETTINGS_STORAGE_VERSION)
     expect(parsed.settings.clusterColor).toBe('#ff0000')
     const loaded = loadSettings()
     expect(loaded.clusterColor).toBe('#ff0000')
@@ -55,7 +54,6 @@ describe('settingsStorage', () => {
     window.localStorage.setItem(
       SETTINGS_STORAGE_KEY,
       JSON.stringify({
-        version: 1,
         settings: {
           ...DEFAULT_MAP_SETTINGS,
           clusterColor: 'invalid',

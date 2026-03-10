@@ -1,11 +1,13 @@
+import { twMerge } from 'tailwind-merge'
 import type { IconProps } from '@/types'
 
-/** Merge class names (e.g. Tailwind). Filters out falsy values and joins with spaces. */
+/** Merge class names (e.g. Tailwind). Filters falsy values and merges so later classes override. */
 export function cn(
-    ...classes: (string | undefined | null | false)[]
-  ): string {
-    return classes.filter(Boolean).join(' ');
-  }
+  ...classes: (string | undefined | null | false)[]
+): string {
+  const filtered = classes.filter(Boolean) as string[]
+  return filtered.length > 0 ? twMerge(...filtered) : ''
+}
 
 // ============================================================================
 // Chevrons / Directional Navigation

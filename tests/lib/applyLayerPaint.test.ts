@@ -6,6 +6,7 @@ import type { MapSettings } from '@/types'
 describe('applyLayerPaint', () => {
   let mockMap: {
     setTerrain: ReturnType<typeof vi.fn>
+    setFog: ReturnType<typeof vi.fn>
     getLayer: ReturnType<typeof vi.fn>
     setPaintProperty: ReturnType<typeof vi.fn>
   }
@@ -13,14 +14,27 @@ describe('applyLayerPaint', () => {
   const settings: MapSettings = {
     ...DEFAULT_MAP_LAYER_OPTIONS,
     mapStyle: 'mapbox://styles/mapbox/outdoors-v12',
+    projection: 'globe',
   }
 
   beforeEach(() => {
     mockMap = {
       setTerrain: vi.fn(),
+      setFog: vi.fn(),
       getLayer: vi.fn((name: string) => name),
       setPaintProperty: vi.fn(),
     }
+  })
+
+  it('calls setFog with atmosphere settings', () => {
+    applyLayerPaint(mockMap as never, settings)
+    expect(mockMap.setFog).toHaveBeenCalledWith({
+      color: settings.fogColor,
+      'high-color': settings.fogHighColor,
+      'space-color': settings.fogSpaceColor,
+      'star-intensity': settings.fogStarIntensity,
+      'horizon-blend': settings.fogHorizonBlend,
+    })
   })
 
   it('calls setTerrain with mapbox-dem and terrainExaggeration', () => {

@@ -2,7 +2,6 @@ import type { MapboxMap, MapSettings } from '@/types'
 import {
   DEFAULT_CIRCLE_STROKE_COLOR,
   DEFAULT_SYMBOL_TEXT_COLOR,
-  SELECTED_MARKER_STROKE_COLOR,
 } from '@/lib/constants'
 
 export function applyLayerPaint(
@@ -13,6 +12,15 @@ export function applyLayerPaint(
     source: 'mapbox-dem',
     exaggeration: settings.terrainExaggeration,
   })
+  if (typeof map.setFog === 'function') {
+    map.setFog({
+      color: settings.fogColor,
+      'high-color': settings.fogHighColor,
+      'space-color': settings.fogSpaceColor,
+      'star-intensity': settings.fogStarIntensity,
+      'horizon-blend': settings.fogHorizonBlend,
+    })
+  }
   if (map.getLayer('sky')) {
     map.setPaintProperty('sky', 'sky-type', settings.skyType)
     map.setPaintProperty('sky', 'sky-atmosphere-sun', settings.skyAtmosphereSun)
@@ -86,7 +94,7 @@ export function applyLayerPaint(
     map.setPaintProperty(
       'selected-marker',
       'circle-stroke-color',
-      SELECTED_MARKER_STROKE_COLOR,
+      settings.selectedMarkerStrokeColor,
     )
   }
 }

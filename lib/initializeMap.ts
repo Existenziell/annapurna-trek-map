@@ -73,7 +73,5 @@ export function initializeMap(
 
   map.on('contextmenu', (e: MapMouseEvent) => {
     e.preventDefault()
-    const { lng, lat } = e.lngLat
-    console.log('Longitude:', lng, 'Latitude:', lat)
   })
 }

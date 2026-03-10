@@ -1,9 +1,6 @@
 import type { MapSettings, StoredSettings } from '@/types'
 import { DEFAULT_MAP_SETTINGS, MAP_STYLE_OPTIONS } from '@/types'
-import {
-  SETTINGS_STORAGE_KEY,
-  SETTINGS_STORAGE_VERSION,
-} from '@/lib/constants'
+import { SETTINGS_STORAGE_KEY } from '@/lib/constants'
 
 function isValidHexColor(s: unknown): s is string {
   return typeof s === 'string' && /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(s)
@@ -16,11 +13,25 @@ function isValidStyleUrl(url: unknown): url is string {
   )
 }
 
+function isValidProjection(p: unknown): p is 'globe' | 'mercator' {
+  return p === 'globe' || p === 'mercator'
+}
+
+function isValidFogColor(s: unknown): s is string {
+  if (typeof s !== 'string' || s.length === 0) return false
+  if (/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(s)) return true
+  if (/^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/.test(s)) return true
+  return false
+}
+
 function validateAndCoerce(partial: Partial<MapSettings>): MapSettings {
   return {
     mapStyle: isValidStyleUrl(partial.mapStyle)
       ? partial.mapStyle
       : DEFAULT_MAP_SETTINGS.mapStyle,
+    projection: isValidProjection(partial.projection)
+      ? partial.projection
+      : DEFAULT_MAP_SETTINGS.projection,
     terrainExaggeration:
       typeof partial.terrainExaggeration === 'number' &&
       partial.terrainExaggeration >= 0 &&
@@ -43,6 +54,27 @@ function validateAndCoerce(partial: Partial<MapSettings>): MapSettings {
       partial.skyAtmosphereSunIntensity <= 100
         ? partial.skyAtmosphereSunIntensity
         : DEFAULT_MAP_SETTINGS.skyAtmosphereSunIntensity,
+    fogColor: isValidFogColor(partial.fogColor)
+      ? partial.fogColor
+      : DEFAULT_MAP_SETTINGS.fogColor,
+    fogHighColor: isValidFogColor(partial.fogHighColor)
+      ? partial.fogHighColor
+      : DEFAULT_MAP_SETTINGS.fogHighColor,
+    fogSpaceColor: isValidFogColor(partial.fogSpaceColor)
+      ? partial.fogSpaceColor
+      : DEFAULT_MAP_SETTINGS.fogSpaceColor,
+    fogStarIntensity:
+      typeof partial.fogStarIntensity === 'number' &&
+      partial.fogStarIntensity >= 0 &&
+      partial.fogStarIntensity <= 1
+        ? partial.fogStarIntensity
+        : DEFAULT_MAP_SETTINGS.fogStarIntensity,
+    fogHorizonBlend:
+      typeof partial.fogHorizonBlend === 'number' &&
+      partial.fogHorizonBlend >= 0 &&
+      partial.fogHorizonBlend <= 1
+        ? partial.fogHorizonBlend
+        : DEFAULT_MAP_SETTINGS.fogHorizonBlend,
     clusterColor: isValidHexColor(partial.clusterColor)
       ? partial.clusterColor
       : DEFAULT_MAP_SETTINGS.clusterColor,
@@ -58,6 +90,9 @@ function validateAndCoerce(partial: Partial<MapSettings>): MapSettings {
       partial.circleOpacity <= 1
         ? partial.circleOpacity
         : DEFAULT_MAP_SETTINGS.circleOpacity,
+    selectedMarkerStrokeColor: isValidHexColor(partial.selectedMarkerStrokeColor)
+      ? partial.selectedMarkerStrokeColor
+      : DEFAULT_MAP_SETTINGS.selectedMarkerStrokeColor,
   }
 }
 
@@ -67,12 +102,7 @@ export function loadSettings(): MapSettings {
     const raw = window.localStorage.getItem(SETTINGS_STORAGE_KEY)
     if (!raw) return DEFAULT_MAP_SETTINGS
     const parsed = JSON.parse(raw) as StoredSettings | null
-    if (
-      !parsed ||
-      parsed.version !== SETTINGS_STORAGE_VERSION ||
-      !parsed.settings
-    )
-      return DEFAULT_MAP_SETTINGS
+    if (!parsed?.settings) return DEFAULT_MAP_SETTINGS
     return validateAndCoerce(parsed.settings)
   } catch {
     return DEFAULT_MAP_SETTINGS
@@ -82,10 +112,7 @@ export function loadSettings(): MapSettings {
 export function saveSettings(settings: MapSettings): void {
   if (typeof window === 'undefined') return
   try {
-    const stored: StoredSettings = {
-      version: SETTINGS_STORAGE_VERSION,
-      settings,
-    }
+    const stored: StoredSettings = { settings }
     window.localStorage.setItem(
       SETTINGS_STORAGE_KEY,
       JSON.stringify(stored),

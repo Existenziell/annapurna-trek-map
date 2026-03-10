@@ -2,20 +2,29 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from '@/components/Icons'
 import type { MarkerViewProps } from '@/types'
 import { data } from '@/data'
+import MarkerInfoCard from '@/components/MarkerInfoCard'
+import { XIcon } from '@/components/Icons'
+
+const TOTAL_MARKERS = data.features.length
 
 export default function MarkerView({
   marker,
   onPrev,
   onNext,
-  hasPrev,
-  hasNext,
+  onResizeHandleMouseDown,
+  onFullscreenChange,
 }: MarkerViewProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [lastLoadedFullscreenSrc, setLastLoadedFullscreenSrc] = useState<string | null>(null)
-  const { altitude, image, video, dateTime, external = false } = marker.properties
+  const hasPrev = marker.id > 1
+  const hasNext = marker.id < TOTAL_MARKERS
+
+  useEffect(() => {
+    onFullscreenChange?.(isFullscreen)
+  }, [isFullscreen, onFullscreenChange])
+  const { image, video, external = false } = marker.properties
   const imageSrc = image ? `/trek/${image}` : null
   const videoSrc = !external && video ? `/trek/${video}` : null
   const vimeoId = external && video ? (/\d{7,}/.exec(String(video))?.[0] ?? null) : null
@@ -50,46 +59,93 @@ export default function MarkerView({
   }, [isFullscreen, hasPrev, hasNext, onPrev, onNext])
 
   return (
-    <div className="flex flex-1 flex-col min-h-[50vh] gap-4">
-      <div className="flex flex-1 min-h-0 items-center justify-center">
-        <button
-          type="button"
-          onClick={() => hasMedia && setIsFullscreen(true)}
-          className={`relative w-full aspect-[4/3] max-h-[50vh] rounded overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:cursor-default disabled:opacity-80 ${vimeoEmbedUrl ? '' : 'shadow-lg'}`}
-          disabled={!hasMedia}
-        >
-          {vimeoEmbedUrl ? (
-            <iframe
-              src={vimeoEmbedUrl}
-              title={alt}
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
-          ) : videoSrc ? (
-            <video
-              src={videoSrc}
-              controls
-              playsInline
-              muted
-              loop
-              className="absolute inset-0 w-full h-full object-cover object-center"
+    <div className="flex flex-1 flex-col gap-4">
+      <div className="relative">
+        {imageSrc && !videoSrc && !vimeoEmbedUrl ? (
+          <div className="relative">
+            {onResizeHandleMouseDown && (
+              <div
+                role="separator"
+                aria-orientation="vertical"
+                title="Drag to resize panel"
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  onResizeHandleMouseDown(e)
+                }}
+                className="resize-handle-vertical"
+                style={{ touchAction: 'none' }}
+              />
+            )}
+            <button
+              type="button"
+              onClick={() => setIsFullscreen(true)}
+              className="cursor-zoom-in focus-ring block w-full max-h-[100vh] rounded-2xl overflow-hidden border-4 border-level-3 shadow-lg bg-level-1"
               aria-label={alt}
-            />
-          ) : imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt={alt}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          ) : (
-            <span className="flex h-full w-full items-center justify-center bg-level-2 text-level-4 text-sm">
-              No image
-            </span>
-          )}
-        </button>
+            >
+              <Image
+                src={imageSrc}
+                alt={alt}
+                width={1200}
+                height={800}
+                className="w-full h-auto block max-h-[100vh]"
+                style={{ maxHeight: '90vh' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </button>
+          </div>
+        ) : (
+          <div className="media-frame">
+            {onResizeHandleMouseDown && (
+              <div
+                role="separator"
+                aria-orientation="vertical"
+                title="Drag to resize panel"
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  onResizeHandleMouseDown(e)
+                }}
+                className="resize-handle-vertical"
+                style={{ touchAction: 'none' }}
+              />
+            )}
+            <button
+              type="button"
+              onClick={() => hasMedia && setIsFullscreen(true)}
+              className={`relative w-full cursor-zoom-in focus-ring disabled:cursor-default disabled:opacity-80 block overflow-hidden ${vimeoEmbedUrl ? 'aspect-video max-h-[90vh]' : 'h-[75vh] min-h-[280px]'}`}
+              disabled={!hasMedia}
+            >
+              {vimeoEmbedUrl ? (
+                <iframe
+                  src={vimeoEmbedUrl}
+                  title={alt}
+                  className="absolute inset-0 w-full h-full object-contain object-center"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              ) : videoSrc ? (
+                <video
+                  src={videoSrc}
+                  controls
+                  playsInline
+                  muted
+                  loop
+                  className="absolute inset-0 w-full h-full object-contain object-center"
+                  aria-label={alt}
+                />
+              ) : (
+                <span className="flex absolute inset-0 items-center justify-center bg-level-2 text-level-4 text-sm">
+                  No image
+                </span>
+              )}
+            </button>
+          </div>
+        )}
+        {/* Marker info overlay inside media, top-right */}
+        <div className="pointer-events-none absolute top-0 right-0 z-20">
+          <MarkerInfoCard marker={marker}  />
+        </div>
       </div>
 
       {isFullscreen && hasMedia && (
@@ -97,15 +153,29 @@ export default function MarkerView({
           role="dialog"
           aria-modal="true"
           aria-label={vimeoEmbedUrl || videoSrc ? 'Fullscreen video' : 'Fullscreen image'}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md cursor-zoom-out"
+          className="overlay-fullscreen"
           onClick={() => setIsFullscreen(false)}
         >
-          <div
-            className="relative flex items-center justify-center max-h-[90vh] max-w-[95vw] cursor-default min-h-[200px] min-w-[200px]"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsFullscreen(false)
+            }}
+            className="btn-close-overlay"
+            aria-label="Close fullscreen"
           >
+            <XIcon className="w-8 h-8" />
+          </button>
+          <div
+            className="absolute inset-2 flex items-center justify-center cursor-zoom-out min-h-0 min-w-0"
+            onClick={() => setIsFullscreen(false)}
+          >
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+              <MarkerInfoCard marker={marker} isFullscreen={true} />
+            </div>
             {vimeoEmbedUrl ? (
-              <div className="relative w-full max-w-[90vw]" style={{ paddingBottom: '56.25%' }}>
+              <div className="relative max-w-full max-h-full w-full aspect-video">
                 <iframe
                   src={vimeoEmbedUrl}
                   title={alt}
@@ -120,7 +190,7 @@ export default function MarkerView({
                 controls
                 playsInline
                 autoPlay
-                className="max-h-[85vh] max-w-[80vw] w-auto h-auto object-contain rounded shadow-lg"
+                className="max-w-full max-h-full w-auto h-auto object-contain rounded"
                 aria-label={alt}
               />
             ) : (
@@ -142,73 +212,17 @@ export default function MarkerView({
                   alt={alt}
                   width={1920}
                   height={1080}
-                  className="max-h-[85vh] max-w-[80vw] w-auto h-auto object-contain rounded shadow-lg"
+                  className="max-w-full max-h-full w-auto h-auto object-contain rounded"
                   draggable={false}
                   onLoad={() => setLastLoadedFullscreenSrc(imageSrc)}
                 />
               </>
             )}
           </div>
-          {hasPrev && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                onPrev()
-              }}
-              className="fixed left-4 top-1/2 -translate-y-1/2 z-[51] flex items-center justify-center w-14 h-14 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors cursor-pointer"
-              aria-label={vimeoEmbedUrl || videoSrc ? 'Previous video' : 'Previous image'}
-            >
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-          )}
-          {hasNext && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                onNext()
-              }}
-              className="fixed right-4 top-1/2 -translate-y-1/2 z-[51] flex items-center justify-center w-14 h-14 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors cursor-pointer"
-              aria-label={vimeoEmbedUrl || videoSrc ? 'Next video' : 'Next image'}
-            >
-              <ChevronRight className="w-8 h-8" />
-            </button>
-          )}
         </div>
       )}
-      <div className="text-sm text-level-4 space-y-1">
-        <p>Altitude: {altitude}m</p>
-        {dateTime && (
-          <p>
-            Date: {new Date(dateTime).toLocaleDateString(undefined, { dateStyle: 'medium' })}
-          </p>
-        )}
-      </div>
-      <div className="mt-auto flex justify-between items-center pt-4 text-sm">
-        {hasPrev ? (
-          <button
-            type="button"
-            onClick={onPrev}
-            className="button"
-          >
-            &lsaquo; Prev
-          </button>
-        ) : (
-          <div />
-        )}
-        {hasNext ? (
-          <button
-            type="button"
-            onClick={onNext}
-            className="button"
-          >
-            Next &rsaquo;
-          </button>
-        ) : null}
-      </div>
     </div>
   )
 }
 
-export const MAX_MARKER_ID = data.features.length
+export const MAX_MARKER_ID = TOTAL_MARKERS

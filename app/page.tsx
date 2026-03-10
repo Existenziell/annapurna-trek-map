@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { useMapboxMap } from '@/hooks/useMapboxMap'
 import { initializeMap } from '@/lib/initializeMap'
@@ -9,10 +10,14 @@ import { applyLayerPaint } from '@/lib/applyLayerPaint'
 import { flyToMarker } from '@/lib/flyToMarker'
 import { loadSettings, saveSettings } from '@/lib/settingsStorage'
 import { data } from '@/data'
-import RightPanel from '@/components/RightPanel'
+import ImagePanel from '@/components/ImagePanel'
+import Welcome from '@/components/Welcome'
 import MobileNotice from '@/components/MobileNotice'
+import SettingsPanel from '@/components/SettingsPanel'
+import Nav from '@/components/Nav'
+import SettingsButton from '@/components/SettingsButton'
 import mapboxgl from 'mapbox-gl'
-import type { MapSettings, RightPanelTabId, TrekMarkerType } from '@/types'
+import type { MapSettings, TrekMarkerType } from '@/types'
 import { DEFAULT_MAP_SETTINGS } from '@/types'
 import {
   DEFAULT_PANEL_WIDTH,
@@ -21,57 +26,34 @@ import {
   INTRO_FLY_DURATION_MS,
   INTRO_ZOOM,
   MAP_CONTAINER_ID,
+  PANEL_RIGHT_OFFSET_PX,
   PANEL_WIDTH_MIN,
-  PANEL_WIDTH_STORAGE_KEY,
 } from '@/lib/constants'
 
-function loadPanelWidth(): number {
-  if (typeof window === 'undefined') return DEFAULT_PANEL_WIDTH
-  try {
-    const raw = window.localStorage.getItem(PANEL_WIDTH_STORAGE_KEY)
-    if (raw == null) return DEFAULT_PANEL_WIDTH
-    const n = Number(raw)
-    if (!Number.isFinite(n)) return DEFAULT_PANEL_WIDTH
-    return Math.max(PANEL_WIDTH_MIN, Math.round(n))
-  } catch {
-    return DEFAULT_PANEL_WIDTH
-  }
-}
-
-function savePanelWidth(width: number): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(PANEL_WIDTH_STORAGE_KEY, String(width))
-  } catch {
-    // ignore
-  }
-}
-
-export default function MapPage() {
+export default function Page() {
   const [settings, setSettings] = useState<MapSettings>(() =>
     typeof window !== 'undefined' ? loadSettings() : DEFAULT_MAP_SETTINGS,
   )
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null)
-  const [activeTab, setActiveTab] = useState<RightPanelTabId>('content')
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [panelWidth, setPanelWidth] = useState(DEFAULT_PANEL_WIDTH)
   const [isResizing, setIsResizing] = useState(false)
+  const [panelMounted, setPanelMounted] = useState(false)
+  const [fullscreenOpen, setFullscreenOpen] = useState(false)
   const layoutRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
   const panelWidthRef = useRef(panelWidth)
   panelWidthRef.current = panelWidth
   const lastAppliedStyleRef = useRef<string | null>(null)
   const selectedMarkerIdRef = useRef<number | null>(null)
   selectedMarkerIdRef.current = selectedMarkerId
 
-  // Restore panel width from localStorage after hydration (avoids SSR mismatch)
-  useEffect(() => {
-    setPanelWidth(loadPanelWidth())
-  }, [])
-
   const { mapRef, isReady, error } = useMapboxMap(MAP_CONTAINER_ID, {
     style: settings.mapStyle,
     zoom: INTRO_ZOOM,
     center: FINAL_VIEW.center,
     pitch: FINAL_VIEW.pitch,
+    projection: settings.projection,
   })
 
   const selectedMarker =
@@ -89,7 +71,6 @@ export default function MapPage() {
     initializeMap(map, {
       onMarkerClick: (marker: TrekMarkerType) => {
         setSelectedMarkerId(Number(marker.id))
-        setActiveTab('content')
         flyToMarker(map, Number(marker.id), data)
       },
     })
@@ -105,7 +86,7 @@ export default function MapPage() {
       })
     }
     // Intentionally omit settings: this effect runs once on mount; settings updates are handled in the effect below.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady, mapRef])
 
   useEffect(() => {
@@ -118,6 +99,7 @@ export default function MapPage() {
       map.once('style.load', () => {
         if (!mapRef.current) return
         addDataLayer(mapRef.current, data, settings)
+        applyLayerPaint(mapRef.current, settings)
         lastAppliedStyleRef.current = settings.mapStyle
         const id = selectedMarkerIdRef.current
         if (mapRef.current.getLayer('selected-marker')) {
@@ -130,6 +112,7 @@ export default function MapPage() {
       })
       return
     }
+    map.setProjection(settings.projection)
     applyLayerPaint(map, settings)
   }, [isReady, mapRef, settings])
 
@@ -145,46 +128,73 @@ export default function MapPage() {
     ])
   }, [selectedMarkerId, isReady, mapRef])
 
+  // Map is fullscreen; resize when map becomes ready and whenever the container or window size changes
   useEffect(() => {
     if (!isReady || !mapRef.current) return
-    mapRef.current.resize()
-  }, [isReady, panelWidth, mapRef])
+    const map = mapRef.current
+    const container = document.getElementById(MAP_CONTAINER_ID)
+    if (!container) return
+    const resize = () => map.resize()
+    const rafId = requestAnimationFrame(resize)
+    const ro = new ResizeObserver(resize)
+    ro.observe(container)
+    window.addEventListener('resize', resize)
+    return () => {
+      cancelAnimationFrame(rafId)
+      ro.disconnect()
+      window.removeEventListener('resize', resize)
+    }
+  }, [isReady, mapRef])
 
-  // Clamp panel to at most 50% when container shrinks (e.g. window resize)
+  // Render panel portal only after mount to avoid hydration mismatch (server has no document.body)
+  useEffect(() => setPanelMounted(true), [])
+
+  // Close settings on Escape
+  useEffect(() => {
+    if (!settingsOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSettingsOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [settingsOpen])
+
+  // Max panel width: layout viewport minus right offset, and 50% of container. Panel is portaled to body so fixed = viewport.
+  const getMaxPanelWidth = useCallback(() => {
+    const clientWidth = document.documentElement.clientWidth
+    const viewportMax = clientWidth - PANEL_RIGHT_OFFSET_PX
+    const containerW = layoutRef.current?.getBoundingClientRect().width ?? clientWidth
+    return Math.min(containerW * 0.5, viewportMax)
+  }, [])
+
+  // Clamp panel so it never extends past viewport
   useEffect(() => {
     const container = layoutRef.current
     if (!container) return
     const clamp = () => {
-      const rect = container.getBoundingClientRect()
-      const maxW = rect.width * 0.5
+      const maxW = getMaxPanelWidth()
       setPanelWidth((w) => (w > maxW ? maxW : w))
     }
     clamp()
     const ro = new ResizeObserver(clamp)
     ro.observe(container)
     return () => ro.disconnect()
-  }, [])
+  }, [getMaxPanelWidth])
 
   const handleResizeStart = useCallback(
     (e: React.MouseEvent) => {
       if (e.button !== 0) return
       e.preventDefault()
       setIsResizing(true)
-      const container = layoutRef.current
-      if (!container) return
       const onMove = (moveEvent: MouseEvent) => {
-        const rect = container.getBoundingClientRect()
-        const width = rect.right - moveEvent.clientX
-        const maxPanelWidth = rect.width * 0.5
-        const clamped = Math.max(
-          PANEL_WIDTH_MIN,
-          Math.min(maxPanelWidth, width),
-        )
-        setPanelWidth(clamped)
+        const clientWidth = document.documentElement.clientWidth
+        const rightEdge = clientWidth - PANEL_RIGHT_OFFSET_PX
+        const maxW = getMaxPanelWidth()
+        const width = rightEdge - moveEvent.clientX
+        setPanelWidth(Math.max(PANEL_WIDTH_MIN, Math.min(maxW, width)))
       }
       const onUp = () => {
         setIsResizing(false)
-        savePanelWidth(panelWidthRef.current)
         document.removeEventListener('mousemove', onMove)
         document.removeEventListener('mouseup', onUp)
         document.body.style.cursor = ''
@@ -196,7 +206,7 @@ export default function MapPage() {
       document.body.style.userSelect = 'none'
       onMove(e.nativeEvent)
     },
-    [],
+    [getMaxPanelWidth],
   )
 
   function handleSettingsChange(newSettings: MapSettings) {
@@ -242,41 +252,75 @@ export default function MapPage() {
   }
 
   return (
-    <div
-      ref={layoutRef}
-      className={`relative flex min-h-0 flex-1 flex-col md:flex-row ${isResizing ? 'select-none' : ''}`}
-    >
-      <MobileNotice />
+    <>
+      <div
+        ref={layoutRef}
+        className={`relative flex min-h-0 flex-1 flex-col ${isResizing ? 'select-none' : ''}`}
+      >
+        <MobileNotice />
+      
+      {/* Welcome overlay: above panel so Start trek is clickable; only when no marker selected */}
+      {selectedMarkerId == null && (
+        <div className="fixed inset-0 z-20 flex items-start justify-end pt-4 pr-4 md:pt-12 md:pr-12 pointer-events-none">
+          <div className="pointer-events-auto">
+            <Welcome onStartTrek={startTrek} />
+          </div>
+        </div>
+      )}
+
+      {/* Global settings button: hidden when settings panel or fullscreen overlay is open */}
+      {!settingsOpen && !fullscreenOpen && (
+        <div className="fixed top-2.5 right-12 z-30">
+          <SettingsButton onClick={() => setSettingsOpen(true)} />
+        </div>
+      )}
+
+      {/* Fullscreen map: map container is fixed inset-0 so it always has viewport size */}
       <div
         id={MAP_CONTAINER_ID}
-        className="min-h-0 min-w-0 flex-1"
+        className={`fixed inset-0 w-screen h-screen min-h-0 min-w-0 transition-[filter] duration-200 ${settingsOpen ? 'blur-sm' : ''}`}
+        aria-hidden
       />
-      <div
-        role="separator"
-        aria-orientation="vertical"
-        aria-valuenow={panelWidth}
-        aria-valuemin={PANEL_WIDTH_MIN}
-        aria-valuetext={`Panel width ${panelWidth}px, up to 50% of container`}
-        title="Drag to resize"
-        onMouseDown={handleResizeStart}
-        className="hidden w-1.5 flex-shrink-0 cursor-col-resize bg-level-3 hover:bg-accent md:block md:min-h-0 md:self-stretch"
-        style={{ touchAction: 'none' }}
-      />
-      <div
-        className="panel-width-wrapper flex min-w-0 flex-shrink-0 flex-col"
-        style={{ ['--panel-width-px' as string]: `${panelWidth}px` }}
-      >
-        <RightPanel
-          selectedMarker={selectedMarker}
+
+      {/* Navigation: only shown when a marker is selected */}
+      {selectedMarkerId != null && selectedMarker && (
+        <Nav
           onPrev={goPrev}
           onNext={goNext}
-          onStartTrek={startTrek}
-          settings={settings}
-          onSettingsChange={handleSettingsChange}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
+          selectedMarkerId={selectedMarkerId}
+          totalMarkers={data.features.length}
         />
+      )}
+
+      {/* Floating settings overlay */}
+      <SettingsPanel
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        settings={settings}
+        onChange={handleSettingsChange}
+      />
       </div>
-    </div>
+
+      {/* Floating Image Panel: portaled to body after mount so fixed = viewport; avoids hydration mismatch */}
+      {panelMounted &&
+        typeof document !== 'undefined' &&
+        document.body &&
+        createPortal(
+          <div
+            ref={panelRef}
+            className="flex fixed top-12 right-4 bottom-0 z-10 flex-col bg-transparent w-full md:w-[var(--panel-width-px)] md:top-28 md:right-2 overflow-hidden"
+            style={{ ['--panel-width-px' as string]: `${panelWidth}px` }}
+          >
+            <ImagePanel
+              selectedMarker={selectedMarker}
+              onPrev={goPrev}
+              onNext={goNext}
+              onResizeHandleMouseDown={handleResizeStart}
+              onFullscreenChange={setFullscreenOpen}
+            />
+          </div>,
+          document.body,
+        )}
+    </>
   )
 }

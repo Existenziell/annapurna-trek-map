@@ -7,7 +7,6 @@ import { DEFAULT_MAP_LAYER_OPTIONS } from '@/types'
 import {
   DEFAULT_CIRCLE_STROKE_COLOR,
   DEFAULT_SYMBOL_TEXT_COLOR,
-  SELECTED_MARKER_STROKE_COLOR,
 } from '@/lib/constants'
 
 function addTerrain(map: MapboxMap, options: MapLayerOptions): void {
@@ -111,7 +110,7 @@ function addTrekLayers(
       'circle-color': options.clusterColor,
       'circle-opacity': options.circleOpacity,
       'circle-stroke-width': 5,
-      'circle-stroke-color': SELECTED_MARKER_STROKE_COLOR,
+      'circle-stroke-color': options.selectedMarkerStrokeColor,
       'circle-stroke-opacity': 1,
     },
   })

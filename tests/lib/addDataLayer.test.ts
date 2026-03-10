@@ -86,9 +86,15 @@ describe('addDataLayer', () => {
       skyType: 'gradient',
       skyAtmosphereSun: [90, 45],
       skyAtmosphereSunIntensity: 25,
+      fogColor: '#bad2eb',
+      fogHighColor: '#245cdf',
+      fogSpaceColor: '#0b0b19',
+      fogStarIntensity: 0.35,
+      fogHorizonBlend: 0.2,
       clusterColor: '#ff0000',
       clusterStrokeOpacity: 0.8,
       circleOpacity: 0.9,
+      selectedMarkerStrokeColor: '#ccff00',
     }
     addDataLayer(mockMap as never, mockMarkerCollection, options)
     expect(mockMap.setTerrain).toHaveBeenCalledWith({

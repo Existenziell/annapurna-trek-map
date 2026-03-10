@@ -1,5 +1,5 @@
 import type { Map as MapboxMapType } from 'mapbox-gl'
-import { SVGProps } from 'react'
+import type { MouseEvent, SVGProps } from 'react'
 
 /** Mapbox map instance used across lib and hooks */
 export type MapboxMap = MapboxMapType
@@ -62,6 +62,7 @@ export interface MapboxMapOptions {
   zoom?: number
   pitch?: number
   style?: string
+  projection?: 'globe' | 'mercator'
 }
 
 /** Options for terrain, sky, and trek layers (used by addDataLayer) */
@@ -70,14 +71,21 @@ export interface MapLayerOptions {
   skyType: 'atmosphere' | 'gradient'
   skyAtmosphereSun: [number, number]
   skyAtmosphereSunIntensity: number
+  fogColor: string
+  fogHighColor: string
+  fogSpaceColor: string
+  fogStarIntensity: number
+  fogHorizonBlend: number
   clusterColor: string
   clusterStrokeOpacity: number
   circleOpacity: number
+  selectedMarkerStrokeColor: string
 }
 
 /** Full settings (map style + layer options) for UI and localStorage */
 export interface MapSettings extends MapLayerOptions {
   mapStyle: string
+  projection: 'globe' | 'mercator'
 }
 
 export const DEFAULT_MAP_LAYER_OPTIONS: MapLayerOptions = {
@@ -85,17 +93,33 @@ export const DEFAULT_MAP_LAYER_OPTIONS: MapLayerOptions = {
   skyType: 'atmosphere',
   skyAtmosphereSun: [0.0, 0.0],
   skyAtmosphereSunIntensity: 15,
+  fogColor: '#bad2eb',
+  fogHighColor: '#245cdf',
+  fogSpaceColor: '#0b0b19',
+  fogStarIntensity: 0.35,
+  fogHorizonBlend: 0.2,
   clusterColor: '#282b29',
   clusterStrokeOpacity: 0.5,
   circleOpacity: 0.75,
+  selectedMarkerStrokeColor: SELECTED_MARKER_STROKE_COLOR,
 }
 
-import { DEFAULT_MAP_STYLE } from '@/lib/constants'
+import {
+  DEFAULT_MAP_STYLE,
+  MAP_PROJECTION,
+  SELECTED_MARKER_STROKE_COLOR,
+} from '@/lib/constants'
 
 export const DEFAULT_MAP_SETTINGS: MapSettings = {
   ...DEFAULT_MAP_LAYER_OPTIONS,
   mapStyle: DEFAULT_MAP_STYLE,
+  projection: MAP_PROJECTION,
 }
+
+export const PROJECTION_OPTIONS: { value: 'globe' | 'mercator'; label: string }[] = [
+  { value: 'globe', label: 'Globe' },
+  { value: 'mercator', label: 'Mercator' },
+]
 
 /** Known map style URLs for validation */
 export const MAP_STYLE_OPTIONS: { value: string; label: string }[] = [
@@ -121,7 +145,6 @@ export interface InitializeMapOptions {
 
 /** Shape of settings when stored in localStorage */
 export interface StoredSettings {
-  version: number
   settings: MapSettings
 }
 
@@ -130,35 +153,31 @@ export interface MarkerViewProps {
   marker: TrekMarkerType
   onPrev: () => void
   onNext: () => void
-  hasPrev: boolean
-  hasNext: boolean
+  onResizeHandleMouseDown?: (e: MouseEvent<HTMLElement>) => void
+  onFullscreenChange?: (isOpen: boolean) => void
 }
 
-/** Props for the ContentTab component */
-export interface ContentTabProps {
+/** Props for the ImagePanel component */
+export interface ImagePanelProps {
   selectedMarker: TrekMarkerType | null
   onPrev: () => void
   onNext: () => void
-  onStartTrek: () => void
+  onResizeHandleMouseDown?: (e: MouseEvent<HTMLElement>) => void
+  onFullscreenChange?: (isOpen: boolean) => void
 }
 
-/** Props for the RightPanel component */
-export interface RightPanelProps {
-  selectedMarker: TrekMarkerType | null
-  onPrev: () => void
-  onNext: () => void
-  onStartTrek: () => void
-  settings: MapSettings
-  onSettingsChange: (settings: MapSettings) => void
-  activeTab: RightPanelTabId
-  onTabChange: (tab: RightPanelTabId) => void
-}
-
-/** Tab identifiers for the right panel */
-export type RightPanelTabId = 'content' | 'settings'
-
-/** Props for the SettingsTab component */
-export interface SettingsTabProps {
+/** Props for the SettingsPanel component */
+export interface SettingsPanelProps {
+  open: boolean
+  onClose: () => void
   settings: MapSettings
   onChange: (settings: MapSettings) => void
+}
+
+/** Props for the Nav component (prev/next marker) */
+export interface NavProps {
+  onPrev: () => void
+  onNext: () => void
+  selectedMarkerId: number
+  totalMarkers: number
 }
