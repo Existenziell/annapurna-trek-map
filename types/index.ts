@@ -89,15 +89,15 @@ export interface MapSettings extends MapLayerOptions {
 }
 
 export const DEFAULT_MAP_LAYER_OPTIONS: MapLayerOptions = {
-  terrainExaggeration: 0.5,
+  terrainExaggeration: 1,
   skyType: 'atmosphere',
   skyAtmosphereSun: [0.0, 0.0],
   skyAtmosphereSunIntensity: 15,
   fogColor: '#bad2eb',
   fogHighColor: '#245cdf',
   fogSpaceColor: '#0b0b19',
-  fogStarIntensity: 0.35,
-  fogHorizonBlend: 0.2,
+  fogStarIntensity: 0.5,
+  fogHorizonBlend: 0.1,
   clusterColor: '#282b29',
   clusterStrokeOpacity: 0.5,
   circleOpacity: 0.75,

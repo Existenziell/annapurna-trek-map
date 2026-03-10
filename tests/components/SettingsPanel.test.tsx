@@ -83,4 +83,19 @@ describe('SettingsPanel', () => {
       }),
     )
   })
+
+  it('calls onChange with DEFAULT_MAP_SETTINGS when Reset to default is clicked', () => {
+    const onChange = vi.fn()
+    renderWithTheme({
+      open: true,
+      onClose: vi.fn(),
+      settings: DEFAULT_MAP_SETTINGS,
+      onChange,
+    })
+    fireEvent.click(
+      screen.getByRole('button', { name: /reset all settings to default/i }),
+    )
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenCalledWith(DEFAULT_MAP_SETTINGS)
+  })
 })

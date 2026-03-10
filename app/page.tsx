@@ -278,7 +278,7 @@ export default function Page() {
       {/* Fullscreen map: map container is fixed inset-0 so it always has viewport size */}
       <div
         id={MAP_CONTAINER_ID}
-        className={`fixed inset-0 w-screen h-screen min-h-0 min-w-0 transition-[filter] duration-200 ${settingsOpen ? 'blur-sm' : ''}`}
+        className="fixed inset-0 w-screen h-screen min-h-0 min-w-0"
         aria-hidden
       />
 
