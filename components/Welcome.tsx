@@ -6,7 +6,7 @@ export interface WelcomeProps {
 
 export default function Welcome({ onStartTrek }: WelcomeProps) {
   return (
-    <div className="flex flex-col gap-6 rounded-md border border-level-3 bg-level-1 shadow-lg p-6 w-[25rem] max-w-[calc(100vw-2rem)]">
+    <div className="flex flex-col gap-6 rounded-md border border-level-3 bg-level-1 shadow-lg p-6 w-[25rem]">
       <h2 className="text-xl font-medium text-level-6">Namaste,</h2>
       <p className="text-level-6 leading-relaxed">
         This is the Annapurna Circuit, one of the most stunning routes in the

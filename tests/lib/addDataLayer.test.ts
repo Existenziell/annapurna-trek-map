@@ -50,7 +50,7 @@ describe('addDataLayer', () => {
     addDataLayer(mockMap as never, mockMarkerCollection)
     expect(mockMap.setTerrain).toHaveBeenCalledWith({
       source: 'mapbox-dem',
-      exaggeration: 0.5,
+      exaggeration: 1,
     })
   })
 

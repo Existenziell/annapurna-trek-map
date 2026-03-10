@@ -659,6 +659,25 @@ export function SystemIcon({ className, ...props }: IconProps) {
   )
 }
 
+export function QuestionMarkCircleIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={cn('w-4 h-4', className)}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+      <path d="M12 17h.01" />
+      <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" />
+    </svg>
+  )
+}
+
 export function GearIcon({ className, ...props }: IconProps) {
   return (
     <svg

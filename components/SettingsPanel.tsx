@@ -343,18 +343,6 @@ export default function SettingsPanel({ open, onClose, settings, onChange }: Set
                 Reset to default
               </button>
             </div>
-
-            <section className="pt-6 mt-2 text-left border-t border-level-3">
-              <h3 className="font-medium mb-2 text-lg">Map controls:</h3>
-              <ul className="leading-relaxed space-y-0.5 list-none text-xs">
-                <li>Hold left mouse button to drag</li>
-                <li>Hold right mouse button to pan / rotate</li>
-                <li>Mouse wheel to zoom</li>
-                <li>Click a marker to view details</li>
-                <li>Click an image to enlarge it</li>
-                <li>Drag the left of the image to resize</li>
-              </ul>
-            </section>
           </div>
         </div>
       </div>
