@@ -15,7 +15,7 @@ export default function MarkerView({
 }: MarkerViewProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [lastLoadedFullscreenSrc, setLastLoadedFullscreenSrc] = useState<string | null>(null)
-  const { altitude, image, video, dateTime, desc, external = false } = marker.properties
+  const { altitude, image, video, dateTime, external = false } = marker.properties
   const imageSrc = image ? `/trek/${image}` : null
   const videoSrc = !external && video ? `/trek/${video}` : null
   const vimeoId = external && video ? (/\d{7,}/.exec(String(video))?.[0] ?? null) : null
@@ -91,9 +91,6 @@ export default function MarkerView({
           )}
         </button>
       </div>
-      {desc != null && desc !== '' && (
-        <p className="text-sm text-level-4">{desc}</p>
-      )}
 
       {isFullscreen && hasMedia && (
         <div
