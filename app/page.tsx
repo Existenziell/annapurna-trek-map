@@ -14,8 +14,10 @@ import ImagePanel from '@/components/ImagePanel'
 import Welcome from '@/components/Welcome'
 import MobileNotice from '@/components/MobileNotice'
 import SettingsPanel from '@/components/SettingsPanel'
+import InfoPanel from '@/components/InfoPanel'
 import Nav from '@/components/Nav'
 import SettingsButton from '@/components/SettingsButton'
+import { QuestionMarkCircleIcon } from '@/components/Icons'
 import mapboxgl from 'mapbox-gl'
 import type { MapSettings, TrekMarkerType } from '@/types'
 import { DEFAULT_MAP_SETTINGS } from '@/types'
@@ -28,6 +30,7 @@ import {
   MAP_CONTAINER_ID,
   PANEL_RIGHT_OFFSET_PX,
   PANEL_WIDTH_MIN,
+  SHOW_NAVIGATION_CONTROL,
 } from '@/lib/constants'
 
 export default function Page() {
@@ -36,6 +39,7 @@ export default function Page() {
   )
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [infoOpen, setInfoOpen] = useState(false)
   const [panelWidth, setPanelWidth] = useState(DEFAULT_PANEL_WIDTH)
   const [isResizing, setIsResizing] = useState(false)
   const [panelMounted, setPanelMounted] = useState(false)
@@ -67,7 +71,9 @@ export default function Page() {
     if (!isReady || !mapRef.current) return
     const map = mapRef.current
     addDataLayer(map, data, settings)
-    map.addControl(new mapboxgl.NavigationControl())
+    if (SHOW_NAVIGATION_CONTROL) {
+      map.addControl(new mapboxgl.NavigationControl())
+    }
     initializeMap(map, {
       onMarkerClick: (marker: TrekMarkerType) => {
         setSelectedMarkerId(Number(marker.id))
@@ -149,15 +155,18 @@ export default function Page() {
   // Render panel portal only after mount to avoid hydration mismatch (server has no document.body)
   useEffect(() => setPanelMounted(true), [])
 
-  // Close settings on Escape
+  // Close settings or info panel on Escape
   useEffect(() => {
-    if (!settingsOpen) return
+    if (!settingsOpen && !infoOpen) return
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSettingsOpen(false)
+      if (e.key === 'Escape') {
+        if (infoOpen) setInfoOpen(false)
+        else setSettingsOpen(false)
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [settingsOpen])
+  }, [settingsOpen, infoOpen])
 
   // Max panel width: layout viewport minus right offset, and 50% of container. Panel is portaled to body so fixed = viewport.
   const getMaxPanelWidth = useCallback(() => {
@@ -258,47 +267,56 @@ export default function Page() {
         className={`relative flex min-h-0 flex-1 flex-col ${isResizing ? 'select-none' : ''}`}
       >
         <MobileNotice />
-      
-      {/* Welcome overlay: above panel so Start trek is clickable; only when no marker selected */}
-      {selectedMarkerId == null && (
-        <div className="fixed inset-0 z-20 flex items-start justify-end pt-4 pr-4 md:pt-12 md:pr-12 pointer-events-none">
-          <div className="pointer-events-auto">
-            <Welcome onStartTrek={startTrek} />
+
+        {/* Welcome overlay: above panel so Start trek is clickable; only when no marker selected */}
+        {selectedMarkerId == null && (
+          <div className="fixed inset-0 z-20 flex items-start justify-end pt-4 pr-4 md:pt-12 md:pr-2 pointer-events-none">
+            <div className="pointer-events-auto">
+              <Welcome onStartTrek={startTrek} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Global settings button: hidden when settings panel or fullscreen overlay is open */}
-      {!settingsOpen && !fullscreenOpen && (
-        <div className="fixed top-2.5 right-12 z-30">
-          <SettingsButton onClick={() => setSettingsOpen(true)} />
-        </div>
-      )}
+        {/* Global info and settings buttons: hidden when either panel or fullscreen is open */}
+        {!settingsOpen && !infoOpen && !fullscreenOpen && (
+          <div className="fixed top-2.5 right-2.5 z-30 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setInfoOpen(true)}
+              className="btn-icon-secondary !p-1.5"
+              aria-label="Info"
+            >
+              <QuestionMarkCircleIcon className="w-5 h-5" />
+            </button>
+            <SettingsButton onClick={() => setSettingsOpen(true)} />
+          </div>
+        )}
 
-      {/* Fullscreen map: map container is fixed inset-0 so it always has viewport size */}
-      <div
-        id={MAP_CONTAINER_ID}
-        className={`fixed inset-0 w-screen h-screen min-h-0 min-w-0 transition-[filter] duration-200 ${settingsOpen ? 'blur-sm' : ''}`}
-        aria-hidden
-      />
-
-      {/* Navigation: only shown when a marker is selected */}
-      {selectedMarkerId != null && selectedMarker && (
-        <Nav
-          onPrev={goPrev}
-          onNext={goNext}
-          selectedMarkerId={selectedMarkerId}
-          totalMarkers={data.features.length}
+        {/* Fullscreen map: map container is fixed inset-0 so it always has viewport size */}
+        <div
+          id={MAP_CONTAINER_ID}
+          className="fixed inset-0 w-screen h-screen min-h-0 min-w-0"
+          aria-hidden
         />
-      )}
 
-      {/* Floating settings overlay */}
-      <SettingsPanel
-        open={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
-        settings={settings}
-        onChange={handleSettingsChange}
-      />
+        {/* Navigation: only shown when a marker is selected */}
+        {selectedMarkerId != null && selectedMarker && (
+          <Nav
+            onPrev={goPrev}
+            onNext={goNext}
+            selectedMarkerId={selectedMarkerId}
+            totalMarkers={data.features.length}
+          />
+        )}
+
+        {/* Floating info and settings overlays */}
+        <InfoPanel open={infoOpen} onClose={() => setInfoOpen(false)} />
+        <SettingsPanel
+          open={settingsOpen}
+          onClose={() => setSettingsOpen(false)}
+          settings={settings}
+          onChange={handleSettingsChange}
+        />
       </div>
 
       {/* Floating Image Panel: portaled to body after mount so fixed = viewport; avoids hydration mismatch */}
@@ -308,7 +326,7 @@ export default function Page() {
         createPortal(
           <div
             ref={panelRef}
-            className="flex fixed top-12 right-4 bottom-0 z-10 flex-col bg-transparent w-full md:w-[var(--panel-width-px)] md:top-28 md:right-2 overflow-hidden"
+            className="flex fixed top-8 right-4 bottom-0 z-10 flex-col bg-transparent w-full md:w-[var(--panel-width-px)] md:top-16 md:right-2 overflow-hidden"
             style={{ ['--panel-width-px' as string]: `${panelWidth}px` }}
           >
             <ImagePanel

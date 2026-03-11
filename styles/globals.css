@@ -46,8 +46,9 @@ Style Sheet for annapurna-trek-map
 	General overrides and utilities
 	========================================================================== */
 
-html, body {
-	scroll-behavior: smooth;
+html,
+body {
+  scroll-behavior: smooth;
 }
 
 .button {
@@ -106,6 +107,11 @@ html, body {
   @apply w-[320px] max-w-full h-full overflow-y-auto bg-level-1 border-l border-level-3 shadow-xl p-4 shrink-0;
 }
 
+/* Info panel drawer */
+.info-panel-drawer {
+  @apply w-[340px] max-w-full h-full overflow-y-auto bg-level-1 border-l border-level-3 shadow-xl p-4 shrink-0;
+}
+
 /* Media container (image/video card) */
 .media-frame {
   @apply relative rounded-2xl border-2 border-level-3 shadow-lg overflow-hidden bg-level-1;
@@ -159,6 +165,7 @@ html, body {
     -moz-appearance: textfield;
     appearance: textfield;
   }
+
   .input-number::-webkit-inner-spin-button,
   .input-number::-webkit-outer-spin-button {
     -webkit-appearance: none;

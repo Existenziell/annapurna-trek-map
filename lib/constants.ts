@@ -9,7 +9,7 @@ export const DEFAULT_MAP_ZOOM = 9.5
 export const DEFAULT_MAP_PITCH = 45
 
 export const INTRO_ZOOM = 1
-export const INTRO_FLY_DURATION_MS = 5000
+export const INTRO_FLY_DURATION_MS = 10000
 export const INTRO_FLY_CURVE = 0.8
 
 export const FINAL_VIEW = {
@@ -35,3 +35,5 @@ export const DEFAULT_SYMBOL_TEXT_COLOR = '#ffffff'
 export const SELECTED_MARKER_STROKE_COLOR = '#ccff00'
 
 export const SETTINGS_STORAGE_KEY = 'annapurna-trek-map-settings'
+
+export const SHOW_NAVIGATION_CONTROL = false
